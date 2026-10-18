@@ -101,7 +101,7 @@ export const GroomBrideSection: React.FC = () => {
 
               <div className="p-3.5 rounded-xl bg-[#350610]/80 border border-[#C9A45C]/30 text-xs sm:text-sm text-[#E8D6A5] font-serif leading-relaxed">
                 <p className="font-semibold text-[#FFF5DF] mb-1">{t('माता-पिता:', 'Parents:')}</p>
-                <p>{t(WEDDING_DATA.bride.parents, 'Sh. Mithilesh Kumar & Smt. Rekha Kumari')}</p>
+                <p>{t(WEDDING_DATA.bride.parents, 'Sh. Mithlesh Bhardwaj & Smt. Rekha Bhardwaj')}</p>
               </div>
             </div>
             <div className="mt-6 pt-4 border-t border-[#C9A45C]/30 w-full text-center">

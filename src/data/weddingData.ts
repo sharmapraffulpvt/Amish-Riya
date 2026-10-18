@@ -79,8 +79,8 @@ export const WEDDING_DATA: WeddingConfig = {
   bride: {
     name: "सुश्री रिया भारद्वाज",
     englishName: "Riya Bhardwaj",
-    parents: "श्री मिथिलेश कुमार एवं श्रीमती रेखा कुमारी",
-    parentsDetails: "सुपुत्री श्री मिथिलेश कुमार एवं श्रीमती रेखा कुमारी"
+    parents: "श्री मिथलेश भारद्वाज एवं श्रीमती रेखा भारद्वाज",
+    parentsDetails: "सुपुत्री श्री मिथलेश भारद्वाज एवं श्रीमती रेखा भारद्वाज"
   },
   weddingDate: {
     hindi: "गुरुवार, 3 दिसंबर 2026",
@@ -92,7 +92,7 @@ export const WEDDING_DATA: WeddingConfig = {
     ganeshaMukhya: "॥ श्री गणेशाय नमः ॥",
     shloka: "वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।\nनिर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥",
     shlokaMeaning: "हे विशाल शरीर वाले, करोड़ों सूर्यों के समान तेजस्वी गणेश जी, मेरे सभी कार्यों को सदा बाधा रहित पूर्ण करें।",
-    invitationNote: "परमपिता परमेश्वर एवं कुलदेवी की असीम अनुकंपा से हमारे प्रिय पुत्र-पुत्री का शुभ विवाह सम्पन्न होने जा रहा है। इस पावन बेला पर आप सपरिवार पधारकर वर-वधू को अपना स्नेह, वात्सल्य एवं शुभाशीर्वाद प्रदान कर हमें अनुगृहीत करें।"
+    invitationNote: "परमपिता परमेश्वर एवं कुलदेवी की असीम अनुकंपा से हमारे प्रिय पुत्र का शुभ विवाह सम्पन्न होने जा रहा है। इस पावन बेला पर आप सपरिवार पधारकर वर-वधू को अपना स्नेह, वात्सल्य एवं शुभाशीर्वाद प्रदान कर हमें अनुगृहीत करें।"
   },
   locations: {
     HOME: {
@@ -117,7 +117,7 @@ export const WEDDING_DATA: WeddingConfig = {
       id: 'RECEPTION',
       name: 'प्रीति भोज (रिसेप्शन) स्थल',
       nameEn: 'Reception Venue',
-      address: 'होटल ग्रैंड मर्क्युरी, सुर्या पैलेस होटल, जेतलपुर रोड, पारसी अगियारी के सामने, सयाजीगंज, वड़ोदरा',
+      address: 'होटल ग्रैंड मर्क्युरी, सुर्या पैलेस, जेतलपुर रोड, पारसी अगियारी के सामने, सयाजीगंज, वड़ोदरा',
       mapQuery: 'Grand Mercure Vadodara Surya Palace, Jetalpur Road, Sayajiganj, Vadodara',
       isConfirmed: true
     }
@@ -142,10 +142,10 @@ export const WEDDING_DATA: WeddingConfig = {
       order: 2,
       title: 'तेल समारोह',
       englishTitle: 'Tel Samaroh',
-      date: '1 December 2026',
-      weekday: 'मंगलवार (Tuesday)',
-      time: 'सुबह 09:00 बजे',
-      isoDate: '2026-12-01T09:00:00',
+      date: '30 November 2026',
+      weekday: 'सोमवार (Monday)',
+      time: 'सुबह 10:00 बजे',
+      isoDate: '2026-11-30T10:00:00',
       locationType: 'HOME',
       iconType: 'oil',
       description: 'पारंपरिक तेल एवं उबटन की शुभ रस्म जो वर को सौंदर्य एवं सकारात्मक ऊर्जा प्रदान करती है।',
@@ -198,10 +198,10 @@ export const WEDDING_DATA: WeddingConfig = {
       order: 6,
       title: 'मंगल फेरे',
       englishTitle: 'Mangal Phere (Wedding Vows)',
-      date: '3 December 2026',
-      weekday: 'गुरुवार (Thursday)',
-      time: 'शाम 07:00 बजे',
-      isoDate: '2026-12-03T19:00:00',
+      date: '4 December 2026',
+      weekday: 'शुक्रवार (Friday)',
+      time: 'सुबह 05:00 बजे',
+      isoDate: '2026-12-04T05:00:00',
       locationType: 'WEDDING',
       iconType: 'fire',
       description: 'पवित्र अग्नि के समक्ष सात फेरे और सात जन्मों का पावन बंधन एवं वरमाला।',
@@ -214,11 +214,11 @@ export const WEDDING_DATA: WeddingConfig = {
       englishTitle: 'Priti Bhoj (Grand Reception)',
       date: '5 December 2026',
       weekday: 'शनिवार (Saturday)',
-      time: 'रात 08:00 बजे',
-      isoDate: '2026-12-05T20:00:00',
+      time: 'शाम 07:00 बजे',
+      isoDate: '2026-12-05T19:00:00',
       locationType: 'RECEPTION',
       iconType: 'feast',
-      description: 'नव-दंपति के स्वागत में भव्य रात्रिभोज एवं मंगल शुभकामना मिलन समारोह।',
+      description: 'नव-दंपति के स्वागत में भव्य प्रीति भोज एवं मंगल शुभकामना मिलन समारोह।',
       rituals: ['आशीर्वाद समारोह', 'रंगारंग शाम', 'शाही भोज']
     }
   ],

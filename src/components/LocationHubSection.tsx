@@ -79,7 +79,7 @@ export const LocationHubSection: React.FC = () => {
                 {t('विवाह स्थल', 'Wedding Venue')}
               </span>
               <h3 className="text-xl font-serif font-bold text-[#FAF3E0] mb-2">
-                {t('मंगल फेरे (गुरुवार, ३ दिसंबर २०२६)', 'Mangal Phere (Thu, 3 Dec 2026)')}
+                {t('मंगल फेरे (शुक्रवार, ४ दिसंबर २०२६, सुबह ०५:०० बजे)', 'Mangal Phere (Fri, 4 Dec 2026, 05:00 AM)')}
               </h3>
               <div className="p-3.5 rounded-xl bg-[#1F0309]/90 border border-amber-400/40 text-amber-200 text-xs sm:text-sm font-serif leading-relaxed mb-4 flex items-start gap-2 text-left">
                 <AlertCircle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
@@ -105,7 +105,7 @@ export const LocationHubSection: React.FC = () => {
                 {t('रिसेप्शन स्थल', 'Reception Venue')}
               </span>
               <h3 className="text-xl font-serif font-bold text-[#FFF5DF] mb-2">
-                {t('प्रीति भोज (शनिवार, ५ दिसंबर २०२६)', 'Priti Bhoj (Sat, 5 Dec 2026)')}
+                {t('प्रीति भोज (शनिवार, ५ दिसंबर २०२६, शाम ०७:०० बजे)', 'Priti Bhoj (Sat, 5 Dec 2026, 07:00 PM)')}
               </h3>
               <p className="text-xs sm:text-sm text-[#FFF5DF]/80 font-serif leading-relaxed mb-4">
                 {WEDDING_DATA.locations.RECEPTION.address}

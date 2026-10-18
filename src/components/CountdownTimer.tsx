@@ -87,8 +87,8 @@ export const CountdownTimer: React.FC = () => {
 
           <p className="mt-6 text-xs sm:text-sm text-[#C9A45C]/90 font-serif tracking-wide">
             {t(
-              '३ दिसंबर २०२६, शाम ०७:०० बजे — वर-वधू को आशीर्वाद प्रदान करें',
-              '3 December 2026, 7:00 PM — Bless the bride and groom'
+              '३ दिसंबर २०२६ — ४ दिसंबर प्रातः ०५:०० बजे पवित्र मंगल फेरे',
+              '3 December 2026 — Sacred Mangal Phere at 5:00 AM on 4 December'
             )}
           </p>
 
