@@ -43,29 +43,30 @@ export const CountdownTimer: React.FC = () => {
   ];
 
   return (
-    <div className="relative max-w-4xl mx-auto px-4 my-12">
+    <div className="relative max-w-4xl mx-auto px-4 my-14">
       <div className="relative p-1 rounded-3xl bg-gradient-to-r from-[#C9A45C]/40 via-[#FAF3E0]/70 to-[#C9A45C]/40 shadow-burgundy-deep">
-        <div className="bg-[#350610]/95 backdrop-blur-md rounded-[22px] px-6 py-8 sm:px-10 sm:py-10 text-center border border-[#C9A45C]/40">
+        <div className="bg-[#350610]/95 backdrop-blur-md rounded-[22px] px-6 py-10 sm:px-12 sm:py-12 text-center border border-[#C9A45C]/40">
 
-          <div className="flex items-center justify-center gap-2 mb-3">
+          <div className="flex items-center justify-center gap-2.5 mb-4">
             <Clock className="w-5 h-5 text-[#C9A45C]" />
-            <span className="text-sm font-serif uppercase tracking-[0.2em] text-[#C9A45C]">
+            <span className="text-base sm:text-lg font-serif uppercase tracking-[0.2em] font-bold text-[#C9A45C]">
               {t('मंगल वेला की प्रतीक्षा', 'Countdown to the Auspicious Union')}
             </span>
             <Calendar className="w-5 h-5 text-[#C9A45C]" />
           </div>
 
-          <h3 className="text-2xl sm:text-3xl font-serif text-[#FFF5DF] font-semibold mb-6">
-            {t('शुभ विवाह मुहूर्त:', 'Auspicious Wedding Moment:')} {t(WEDDING_DATA.weddingDate.hindi, WEDDING_DATA.weddingDate.english)}
+          <h3 className="text-2xl sm:text-4xl font-serif text-[#FFF5DF] font-bold mb-8">
+            {t('शुभ विवाह मुहूर्त:', 'Auspicious Wedding Moment:')}{' '}
+            <span className="text-[#FAF3E0]">{t(WEDDING_DATA.weddingDate.hindi, WEDDING_DATA.weddingDate.english)}</span>
           </h3>
 
           {timeLeft.isPast ? (
-            <div className="py-6 px-4 bg-[#650D1B]/60 rounded-2xl border border-[#C9A45C] text-[#FFF5DF] flex flex-col items-center justify-center gap-3">
-              <Sparkles className="w-8 h-8 text-[#E8D6A5] animate-pulse" />
-              <p className="text-2xl sm:text-3xl font-serif text-[#FAF3E0] font-bold">
+            <div className="py-8 px-6 bg-[#650D1B]/60 rounded-2xl border border-[#C9A45C] text-[#FFF5DF] flex flex-col items-center justify-center gap-3">
+              <Sparkles className="w-10 h-10 text-[#E8D6A5] animate-pulse" />
+              <p className="text-2xl sm:text-4xl font-serif text-[#FAF3E0] font-bold">
                 {t('मंगल विवाहोत्सव जारी है!', 'The Celebration Has Begun!')}
               </p>
-              <p className="text-sm sm:text-base text-[#C9A45C] font-serif">
+              <p className="text-base sm:text-lg text-[#C9A45C] font-serif font-medium">
                 {t('अमीश एवं रिया के शुभ विवाह की मंगल बेला', 'Celebrating the divine union of Amish & Riya')}
               </p>
             </div>
@@ -74,18 +75,18 @@ export const CountdownTimer: React.FC = () => {
               {timeBlocks.map((block, idx) => (
                 <div
                   key={idx}
-                  className="relative p-4 sm:p-5 rounded-2xl bg-gradient-to-b from-[#650D1B]/80 to-[#350610]/90 border border-[#C9A45C]/50 shadow-gold-glow flex flex-col items-center justify-center transform transition-transform hover:-translate-y-1"
+                  className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-b from-[#650D1B]/80 to-[#350610]/90 border border-[#C9A45C]/50 shadow-gold-glow flex flex-col items-center justify-center transform transition-transform hover:-translate-y-1"
                 >
-                  <span className="text-3xl sm:text-5xl font-bold font-serif text-transparent bg-clip-text bg-gradient-to-b from-[#FAF3E0] to-[#C9A45C] tabular-nums">
+                  <span className="text-4xl sm:text-6xl font-bold font-serif text-transparent bg-clip-text bg-gradient-to-b from-[#FAF3E0] to-[#C9A45C] tabular-nums">
                     {String(block.value).padStart(2, '0')}
                   </span>
-                  <span className="mt-2 text-sm font-serif text-[#FFF5DF] font-medium">{block.label}</span>
+                  <span className="mt-2 text-base sm:text-lg font-serif text-[#FFF5DF] font-semibold">{block.label}</span>
                 </div>
               ))}
             </div>
           )}
 
-          <p className="mt-6 text-xs sm:text-sm text-[#C9A45C]/90 font-serif tracking-wide">
+          <p className="mt-8 text-sm sm:text-base text-[#FAF3E0] font-serif font-medium tracking-wide">
             {t(
               '३ दिसंबर २०२६ — ४ दिसंबर प्रातः ०५:०० बजे पवित्र मंगल फेरे',
               '3 December 2026 — Sacred Mangal Phere at 5:00 AM on 4 December'

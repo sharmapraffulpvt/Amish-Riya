@@ -68,7 +68,7 @@ export const ContactRsvpSection: React.FC = () => {
       
       {/* Header */}
       <div className="text-center mb-12">
-        <span className="text-xs sm:text-sm font-serif tracking-[0.25em] text-[#C9A45C] uppercase block mb-2">
+        <span className="text-sm sm:text-base font-serif tracking-[0.25em] text-[#C9A45C] uppercase font-semibold block mb-2">
           {t("॥ संपर्क एवं उपस्थिति पुष्टि ॥", "॥ Contact & RSVP ॥")}
         </span>
         <h2 className="text-3xl sm:text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FAF3E0] via-[#E8D6A5] to-[#C9A45C] drop-shadow-md">
@@ -79,7 +79,7 @@ export const ContactRsvpSection: React.FC = () => {
           <HeartHandshake className="w-5 h-5 text-[#C9A45C]" />
           <span className="h-[1px] w-16 bg-gradient-to-l from-transparent to-[#C9A45C]" />
         </div>
-        <p className="text-sm sm:text-base text-[#FFF5DF]/90 font-serif max-w-xl mx-auto">
+        <p className="text-base sm:text-lg text-[#FFF5DF] font-serif max-w-xl mx-auto">
           {t(
             "विवाह व्यवस्था एवं स्वागत सत्कार हेतु कृपया अपनी उपस्थिति की सूचना प्रदान करें।",
             "Please confirm your attendance so we may arrange hospitality with royal care."
@@ -92,11 +92,11 @@ export const ContactRsvpSection: React.FC = () => {
         {/* 1. Contact Numbers Card */}
         <div className="p-1 rounded-3xl bg-gradient-to-b from-[#C9A45C]/50 via-[#650D1B] to-[#C9A45C]/50 shadow-burgundy-deep">
           <div className="bg-[#350610]/95 rounded-[22px] p-6 sm:p-8 border border-[#C9A45C]/30 text-left">
-            <h3 className="text-xl font-serif font-bold text-[#FAF3E0] mb-2 flex items-center gap-2">
+            <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#FAF3E0] mb-2 flex items-center gap-2">
               <Phone className="w-5 h-5 text-[#C9A45C]" />
               <span>{t("परिवार संपर्क सूत्र", "Family Contact Persons")}</span>
             </h3>
-            <p className="text-xs text-[#C9A45C]/80 font-serif mb-6">
+            <p className="text-sm text-[#C9A45C] font-serif mb-6">
               {t(
                 "किसी भी सहायता अथवा जानकारी हेतु निःसंकोच संपर्क करें।",
                 "Feel free to connect for any assistance, travel, or accommodations."
@@ -107,49 +107,49 @@ export const ContactRsvpSection: React.FC = () => {
               {WEDDING_DATA.contacts.map((contact, idx) => (
                 <div
                   key={idx}
-                  className="p-4 rounded-2xl bg-[#650D1B]/60 border border-[#C9A45C]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                  className="p-4 sm:p-5 rounded-2xl bg-[#650D1B]/60 border border-[#C9A45C]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                 >
                   <div>
-                    <h4 className="text-base font-serif font-bold text-[#FFF5DF]">
+                    <h4 className="text-lg sm:text-xl font-serif font-bold text-[#FFF5DF]">
                       {t(contact.name, contact.nameEn || contact.name)}
                     </h4>
-                    <p className="text-xs text-[#E8D6A5] font-serif mb-1">
+                    <p className="text-sm text-[#E8D6A5] font-serif mb-1 font-medium">
                       {t(contact.role, contact.roleEn || contact.role)}
                     </p>
-                    <span className="text-sm font-semibold text-[#C9A45C] tracking-wider font-mono">
+                    <span className="text-base sm:text-lg font-bold text-[#C9A45C] tracking-wider font-mono">
                       {contact.phone}
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2.5">
                     {/* Call Button */}
                     <button
                       onClick={() => handleCall(contact.phone)}
-                      className="p-2.5 rounded-xl bg-[#350610] border border-[#C9A45C] text-[#FAF3E0] hover:bg-[#831425] transition-colors cursor-pointer"
+                      className="p-3 rounded-xl bg-[#350610] border border-[#C9A45C] text-[#FAF3E0] hover:bg-[#831425] transition-colors cursor-pointer"
                       title={t("फ़ोन कॉल करें", "Call on Phone")}
                     >
-                      <Phone className="w-4 h-4 text-[#C9A45C]" />
+                      <Phone className="w-5 h-5 text-[#C9A45C]" />
                     </button>
 
                     {/* WhatsApp Button */}
                     <button
                       onClick={() => handleWhatsApp(contact.whatsappNumber)}
-                      className="p-2.5 rounded-xl bg-[#25D366]/20 border border-[#25D366]/60 text-green-300 hover:bg-[#25D366]/30 transition-colors cursor-pointer"
+                      className="p-3 rounded-xl bg-[#25D366]/20 border border-[#25D366]/60 text-green-300 hover:bg-[#25D366]/30 transition-colors cursor-pointer"
                       title={t("व्हाट्सएप पर संदेश भेजें", "Send WhatsApp message")}
                     >
-                      <MessageCircle className="w-4 h-4 text-green-400" />
+                      <MessageCircle className="w-5 h-5 text-green-400" />
                     </button>
 
                     {/* Copy Button */}
                     <button
                       onClick={() => handleCopyPhone(contact.phone, idx)}
-                      className="p-2.5 rounded-xl bg-[#350610] border border-[#C9A45C]/50 text-[#E8D6A5] hover:text-white transition-colors cursor-pointer"
+                      className="p-3 rounded-xl bg-[#350610] border border-[#C9A45C]/50 text-[#E8D6A5] hover:text-white transition-colors cursor-pointer"
                       title={t("नंबर कॉपी करें", "Copy Phone Number")}
                     >
                       {copiedIndex === idx ? (
-                        <Check className="w-4 h-4 text-emerald-400" />
+                        <Check className="w-5 h-5 text-emerald-400" />
                       ) : (
-                        <Copy className="w-4 h-4" />
+                        <Copy className="w-5 h-5" />
                       )}
                     </button>
                   </div>
@@ -157,7 +157,7 @@ export const ContactRsvpSection: React.FC = () => {
               ))}
             </div>
 
-            <div className="mt-6 p-3.5 rounded-xl bg-[#1F0309]/80 border border-[#C9A45C]/30 text-xs text-[#C9A45C] font-serif text-center">
+            <div className="mt-6 p-4 rounded-xl bg-[#1F0309]/80 border border-[#C9A45C]/30 text-sm font-serif font-semibold text-[#C9A45C] text-center">
               {t("वड़ोदरा, गुजरात", "Vadodara, Gujarat")}
             </div>
           </div>
@@ -167,24 +167,24 @@ export const ContactRsvpSection: React.FC = () => {
         <div className="p-1 rounded-3xl bg-gradient-to-b from-[#C9A45C]/50 via-[#650D1B] to-[#C9A45C]/50 shadow-burgundy-deep">
           <div className="bg-[#350610]/95 rounded-[22px] p-6 sm:p-8 border border-[#C9A45C]/30 text-left">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-xl font-serif font-bold text-[#FAF3E0] flex items-center gap-2">
+              <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#FAF3E0] flex items-center gap-2">
                 <Send className="w-5 h-5 text-[#C9A45C]" />
                 <span>{t("RSVP - उपस्थिति पुष्टि", "RSVP - Confirm Attendance")}</span>
               </h3>
-              <span className="text-[11px] font-serif text-[#C9A45C] bg-[#650D1B] px-2.5 py-0.5 rounded-full border border-[#C9A45C]/40">
+              <span className="text-xs font-serif font-semibold text-[#C9A45C] bg-[#650D1B] px-3 py-1 rounded-full border border-[#C9A45C]/40">
                 via WhatsApp
               </span>
             </div>
-            <p className="text-xs text-[#C9A45C]/80 font-serif mb-5">
+            <p className="text-sm text-[#C9A45C] font-serif mb-6">
               {t(
                 "संदेश भेजने से पूर्व आप नीचे उसका पूर्वावलोकन (Preview) देख सकते हैं।",
                 "Review the preview below before sending your confirmation via WhatsApp."
               )}
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div>
-                <label htmlFor="rsvp-guest-name" className="block text-xs font-serif text-[#E8D6A5] mb-1">
+                <label htmlFor="rsvp-guest-name" className="block text-sm font-serif font-semibold text-[#E8D6A5] mb-1.5">
                   {t("आपका शुभ नाम (Guest Name)", "Your Name")}
                 </label>
                 <input
@@ -193,21 +193,21 @@ export const ContactRsvpSection: React.FC = () => {
                   value={guestName}
                   onChange={(e) => setGuestName(e.target.value)}
                   placeholder={t("अपना नाम दर्ज करें", "Enter your name")}
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#1F0309] border border-[#C9A45C]/40 text-[#FFF5DF] text-sm font-serif focus:outline-none focus:border-[#C9A45C]"
+                  className="w-full px-4 py-3 rounded-xl bg-[#1F0309] border border-[#C9A45C]/40 text-[#FFF5DF] text-base font-serif focus:outline-none focus:border-[#C9A45C]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-serif text-[#E8D6A5] mb-1">
+                <label className="block text-sm font-serif font-semibold text-[#E8D6A5] mb-1.5">
                   {t("उपस्थिति विकल्प (Attending Status)", "Attendance Status")}
                 </label>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-3">
                   <button
                     type="button"
                     onClick={() => setAttendingStatus('yes')}
-                    className={`py-2 px-3 rounded-xl border text-xs font-serif transition-colors cursor-pointer ${
+                    className={`py-2.5 px-3 rounded-xl border text-sm font-serif transition-colors cursor-pointer ${
                       attendingStatus === 'yes'
-                        ? 'bg-[#650D1B] border-[#C9A45C] text-[#FAF3E0] font-bold'
+                        ? 'bg-[#650D1B] border-[#C9A45C] text-[#FAF3E0] font-bold shadow-sm'
                         : 'bg-[#1F0309] border-[#C9A45C]/30 text-[#FFF5DF]/70'
                     }`}
                   >
@@ -216,9 +216,9 @@ export const ContactRsvpSection: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setAttendingStatus('blessings')}
-                    className={`py-2 px-3 rounded-xl border text-xs font-serif transition-colors cursor-pointer ${
+                    className={`py-2.5 px-3 rounded-xl border text-sm font-serif transition-colors cursor-pointer ${
                       attendingStatus === 'blessings'
-                        ? 'bg-[#650D1B] border-[#C9A45C] text-[#FAF3E0] font-bold'
+                        ? 'bg-[#650D1B] border-[#C9A45C] text-[#FAF3E0] font-bold shadow-sm'
                         : 'bg-[#1F0309] border-[#C9A45C]/30 text-[#FFF5DF]/70'
                     }`}
                   >
@@ -229,14 +229,14 @@ export const ContactRsvpSection: React.FC = () => {
 
               {attendingStatus === 'yes' && (
                 <div>
-                  <label htmlFor="rsvp-guest-count" className="block text-xs font-serif text-[#E8D6A5] mb-1">
+                  <label htmlFor="rsvp-guest-count" className="block text-sm font-serif font-semibold text-[#E8D6A5] mb-1.5">
                     {t("अतिथियों की संख्या (Number of Guests)", "Number of Guests")}
                   </label>
                   <select
                     id="rsvp-guest-count"
                     value={guestCount}
                     onChange={(e) => setGuestCount(Number(e.target.value))}
-                    className="w-full px-4 py-2 rounded-xl bg-[#1F0309] border border-[#C9A45C]/40 text-[#FFF5DF] text-sm font-serif focus:outline-none focus:border-[#C9A45C]"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#1F0309] border border-[#C9A45C]/40 text-[#FFF5DF] text-base font-serif focus:outline-none focus:border-[#C9A45C]"
                   >
                     {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
                       <option key={num} value={num} className="bg-[#350610]">
@@ -248,14 +248,14 @@ export const ContactRsvpSection: React.FC = () => {
               )}
 
               {/* Message Preview */}
-              <div className="p-3.5 rounded-xl bg-[#1F0309]/90 border border-[#C9A45C]/40 text-xs font-serif">
-                <span className="text-[#C9A45C] font-semibold block mb-1">
+              <div className="p-4 rounded-xl bg-[#1F0309]/90 border border-[#C9A45C]/40 text-sm font-serif">
+                <span className="text-[#C9A45C] font-semibold block mb-1.5">
                   {t("व्हाट्सएप संदेश पूर्वावलोकन:", "WhatsApp Message Preview:")}
                 </span>
-                <p className="text-[#FFF5DF]/90 italic leading-relaxed">
+                <p className="text-[#FFF5DF] italic leading-relaxed text-sm sm:text-base">
                   "{getRsvpMessage()}"
                 </p>
-                <span className="text-[10px] text-[#E8D6A5]/70 block mt-1.5">
+                <span className="text-xs text-[#E8D6A5] block mt-2">
                   {t("प्राप्तकर्ता:", "Recipient:")} {defaultContact.name} ({defaultContact.phone})
                 </span>
               </div>
@@ -264,11 +264,11 @@ export const ContactRsvpSection: React.FC = () => {
               <button
                 type="button"
                 onClick={handleSendRsvp}
-                className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-serif font-bold text-sm shadow-lg hover:opacity-95 transition-opacity cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-serif font-bold text-base shadow-lg hover:opacity-95 transition-opacity cursor-pointer"
               >
-                <MessageCircle className="w-4 h-4" />
+                <MessageCircle className="w-5 h-5" />
                 <span>{t("व्हाट्सएप पर RSVP भेजें", "Send RSVP via WhatsApp")}</span>
-                <Sparkles className="w-3.5 h-3.5" />
+                <Sparkles className="w-4 h-4" />
               </button>
 
             </div>

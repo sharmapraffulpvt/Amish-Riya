@@ -38,29 +38,29 @@ export const AudioControl: React.FC<AudioControlProps> = ({ className = '' }) =>
         <div
           role="status"
           aria-live="polite"
-          className="bg-[#350610]/95 border border-[#C9A45C] text-[#FFF5DF] text-xs px-3 py-2 rounded-full shadow-gold-glow backdrop-blur-md hidden sm:flex items-center gap-2"
+          className="bg-[#350610]/95 border border-[#C9A45C] text-[#FFF5DF] text-sm px-4 py-2.5 rounded-full shadow-gold-glow backdrop-blur-md hidden sm:flex items-center gap-2"
         >
-          <Music className="w-3.5 h-3.5 text-[#C9A45C] animate-pulse" />
+          <Music className="w-4 h-4 text-[#C9A45C] animate-pulse" />
           <span>मंगल शहनाई संगीत सक्रिय (Sound ON)</span>
         </div>
       )}
 
       {/* Row: Language Toggle + Sound Toggle */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2.5">
 
         {/* Language Toggle Button */}
         <button
           onClick={handleLangToggle}
           aria-label={lang === 'hi' ? 'Switch to English' : 'हिंदी में बदलें'}
           title={lang === 'hi' ? 'Switch to English' : 'Switch to Hindi'}
-          className="group flex items-center gap-2 px-4 py-3 rounded-full border border-[#C9A45C]/70 bg-[#1F0309]/85 backdrop-blur-md text-[#E8D6A5]/90 hover:border-[#C9A45C] hover:text-[#FFF5DF] transition-all duration-300 shadow-lg cursor-pointer"
+          className="group flex items-center gap-2.5 px-5 py-3.5 rounded-full border border-[#C9A45C]/80 bg-[#1F0309]/90 backdrop-blur-md text-[#E8D6A5] hover:border-[#FAF3E0] hover:text-[#FFF5DF] transition-all duration-300 shadow-xl cursor-pointer"
         >
           <Languages className="w-5 h-5 text-[#C9A45C] group-hover:scale-110 transition-transform" />
-          <div className="flex flex-col text-left leading-none">
-            <span className="text-[11px] font-bold tracking-wide text-[#E8D6A5]">
+          <div className="flex flex-col text-left leading-tight">
+            <span className="text-xs sm:text-sm font-bold tracking-wider text-[#FAF3E0]">
               {lang === 'hi' ? 'ENGLISH' : 'हिंदी'}
             </span>
-            <span className="text-[9px] text-[#C9A45C]/80 font-serif">
+            <span className="text-[11px] text-[#C9A45C] font-serif font-medium">
               {lang === 'hi' ? 'Switch Language' : 'भाषा बदलें'}
             </span>
           </div>
@@ -71,10 +71,10 @@ export const AudioControl: React.FC<AudioControlProps> = ({ className = '' }) =>
           onClick={handleToggle}
           aria-label={isEnabled ? 'Mute Music' : 'Play Indian Wedding Music'}
           title={isEnabled ? 'Mute Music (ध्वनि बंद करें)' : 'Play Music (ध्वनि चालू करें)'}
-          className={`group relative flex items-center gap-2.5 px-4 py-3 rounded-full border transition-all duration-300 shadow-lg backdrop-blur-md cursor-pointer ${
+          className={`group relative flex items-center gap-3 px-5 py-3.5 rounded-full border transition-all duration-300 shadow-xl backdrop-blur-md cursor-pointer ${
             isEnabled
-              ? 'bg-[#350610]/90 border-[#C9A45C] text-[#FFF5DF] shadow-gold-glow'
-              : 'bg-[#1F0309]/80 border-[#C9A45C]/40 text-[#E8D6A5]/80 hover:border-[#C9A45C] hover:text-[#FFF5DF]'
+              ? 'bg-[#350610]/95 border-[#C9A45C] text-[#FFF5DF] shadow-gold-glow'
+              : 'bg-[#1F0309]/90 border-[#C9A45C]/50 text-[#E8D6A5] hover:border-[#FAF3E0] hover:text-[#FFF5DF]'
           }`}
         >
           {isEnabled ? (
@@ -86,17 +86,17 @@ export const AudioControl: React.FC<AudioControlProps> = ({ className = '' }) =>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C9A45C]"></span>
                 </span>
               </div>
-              <div className="flex flex-col text-left leading-none">
-                <span className="text-[11px] font-semibold text-[#E8D6A5] tracking-wide">MUSIC ON</span>
-                <span className="text-[9px] text-[#C9A45C]/90 font-serif">शहनाई वादन</span>
+              <div className="flex flex-col text-left leading-tight">
+                <span className="text-xs sm:text-sm font-bold text-[#FAF3E0] tracking-wider">MUSIC ON</span>
+                <span className="text-[11px] text-[#C9A45C] font-serif font-medium">शहनाई वादन</span>
               </div>
             </>
           ) : (
             <>
-              <VolumeX className="w-5 h-5 text-[#C9A45C]/70 group-hover:text-[#C9A45C]" />
-              <div className="flex flex-col text-left leading-none">
-                <span className="text-[11px] font-medium text-[#FFF5DF]/80 group-hover:text-[#FFF5DF] tracking-wide">MUSIC OFF</span>
-                <span className="text-[9px] text-[#C9A45C]/70 font-serif">क्लिक कर सुनें</span>
+              <VolumeX className="w-5 h-5 text-[#C9A45C]/80 group-hover:text-[#C9A45C]" />
+              <div className="flex flex-col text-left leading-tight">
+                <span className="text-xs sm:text-sm font-semibold text-[#FFF5DF] tracking-wider">MUSIC OFF</span>
+                <span className="text-[11px] text-[#C9A45C] font-serif font-medium">क्लिक कर सुनें</span>
               </div>
             </>
           )}

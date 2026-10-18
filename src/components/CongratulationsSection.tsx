@@ -132,13 +132,13 @@ export const CongratulationsSection: React.FC = () => {
     <section className="relative max-w-4xl mx-auto px-4 py-16 text-center">
       
       {/* Header */}
-      <span className="text-xs sm:text-sm font-serif tracking-[0.25em] text-[#C9A45C] uppercase block mb-2">
+      <span className="text-sm sm:text-base font-serif tracking-[0.25em] text-[#C9A45C] uppercase font-semibold block mb-2">
         {t("॥ शुभकामना एवं शुभाशीर्वाद ॥", "॥ Blessings & Wishes ॥")}
       </span>
       <h2 className="text-3xl sm:text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FAF3E0] via-[#E8D6A5] to-[#C9A45C] drop-shadow-md">
         {t("वर-वधू को स्नेह एवं शुभाशीर्वाद", "Send Your Love & Blessings")}
       </h2>
-      <p className="mt-2 text-sm sm:text-base text-[#FFF5DF]/90 font-serif">
+      <p className="mt-2 text-base sm:text-lg text-[#FFF5DF] font-serif">
         {t(
           "वर-वधू अमीश एवं रिया को अपना स्नेह, प्रेम व मंगल आशीर्वाद समर्पित करें।",
           "Shower your heartfelt blessings and warm wishes upon Amish and Riya."
@@ -160,10 +160,10 @@ export const CongratulationsSection: React.FC = () => {
         </button>
 
         {/* Live Session Counter */}
-        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#1F0309]/90 border border-[#C9A45C]/50 text-xs sm:text-sm font-serif text-[#E8D6A5] shadow-inner mt-2">
+        <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-[#1F0309]/90 border border-[#C9A45C]/50 text-sm sm:text-base font-serif text-[#E8D6A5] shadow-inner mt-2">
           <Heart className="w-4 h-4 text-rose-500 fill-rose-500" />
           <span>{t("इस सत्र में प्राप्त कुल आशीर्वाद:", "Blessings received this session:")}</span>
-          <strong className="text-[#FAF3E0] text-base">{congratsCount}</strong>
+          <strong className="text-[#FAF3E0] text-lg font-bold">{congratsCount}</strong>
         </div>
       </div>
 
@@ -172,7 +172,7 @@ export const CongratulationsSection: React.FC = () => {
         <div
           role="status"
           aria-live="polite"
-          className="mt-6 mx-auto max-w-md p-4 rounded-2xl bg-[#650D1B] border-2 border-[#C9A45C] text-[#FFF5DF] shadow-gold-glow flex items-center justify-center gap-2 text-sm font-serif animate-bounce"
+          className="mt-6 mx-auto max-w-md p-4 rounded-2xl bg-[#650D1B] border-2 border-[#C9A45C] text-[#FFF5DF] shadow-gold-glow flex items-center justify-center gap-2 text-sm sm:text-base font-serif animate-bounce"
         >
           <CheckCircle2 className="w-5 h-5 text-[#E8D6A5] shrink-0" />
           <span>{celebrationToast}</span>
@@ -180,16 +180,16 @@ export const CongratulationsSection: React.FC = () => {
       )}
 
       {/* Quick Blessing Buttons */}
-      <div className="mt-10">
-        <p className="text-xs font-serif uppercase tracking-wider text-[#C9A45C] mb-4">
+      <div className="mt-12">
+        <p className="text-sm font-serif uppercase tracking-wider font-semibold text-[#C9A45C] mb-5">
           {t("त्वरित आशीर्वाद चुनें (One-Click Blessings)", "One-Click Quick Blessings")}
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-3">
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 max-w-2xl mx-auto">
           {quickBlessings.map((b, idx) => (
             <button
               key={idx}
               onClick={() => handleQuickBlessing(t(b.hi, b.en))}
-              className="px-4 py-2.5 rounded-full bg-[#650D1B]/70 border border-[#C9A45C]/50 text-xs sm:text-sm font-serif text-[#FFF5DF] hover:bg-[#831425] hover:border-[#C9A45C] transition-all duration-200 cursor-pointer shadow-sm hover:scale-105"
+              className="px-5 py-3 rounded-full bg-[#650D1B]/80 border border-[#C9A45C]/60 text-sm sm:text-base font-serif text-[#FAF3E0] font-medium hover:bg-[#831425] hover:border-[#FAF3E0] transition-all duration-200 cursor-pointer shadow-md hover:scale-105"
             >
               {t(b.hi, b.en)}
             </button>
@@ -203,11 +203,11 @@ export const CongratulationsSection: React.FC = () => {
           onSubmit={handleSubmitCustomBlessing}
           className="bg-[#350610]/95 rounded-[22px] p-6 sm:p-8 border border-[#C9A45C]/30 text-left"
         >
-          <h3 className="text-lg font-serif font-bold text-[#FAF3E0] mb-1 flex items-center gap-2">
-            <Send className="w-4 h-4 text-[#C9A45C]" />
+          <h3 className="text-xl font-serif font-bold text-[#FAF3E0] mb-1 flex items-center gap-2">
+            <Send className="w-5 h-5 text-[#C9A45C]" />
             <span>{t("अपना व्यक्तिगत संदेश लिखें (Guestbook)", "Write a Personal Blessing (Guestbook)")}</span>
           </h3>
-          <p className="text-xs text-[#C9A45C]/80 font-serif mb-4">
+          <p className="text-sm text-[#C9A45C] font-serif mb-5">
             {t(
               "(यह संदेश आपके वर्तमान ब्राउज़र सत्र की आमंत्रण डायरी में प्रदर्शित होगा)",
               "(This blessing will appear in your live session guestbook wall)"
@@ -216,7 +216,7 @@ export const CongratulationsSection: React.FC = () => {
 
           <div className="space-y-4">
             <div>
-              <label htmlFor="sender-name-input" className="block text-xs font-serif text-[#E8D6A5] mb-1">
+              <label htmlFor="sender-name-input" className="block text-sm font-serif font-semibold text-[#E8D6A5] mb-1.5">
                 {t("आपका नाम (Your Name)", "Your Name")}
               </label>
               <input
@@ -225,12 +225,12 @@ export const CongratulationsSection: React.FC = () => {
                 value={senderName}
                 onChange={(e) => setSenderName(e.target.value)}
                 placeholder={t("उदा. राहुल शर्मा / प्रिया वर्मा", "e.g. Rahul Sharma / Priya Verma")}
-                className="w-full px-4 py-2.5 rounded-xl bg-[#1F0309] border border-[#C9A45C]/40 text-[#FFF5DF] placeholder-[#C9A45C]/40 text-sm font-serif focus:outline-none focus:border-[#C9A45C]"
+                className="w-full px-4 py-3 rounded-xl bg-[#1F0309] border border-[#C9A45C]/40 text-[#FFF5DF] placeholder-[#C9A45C]/40 text-base font-serif focus:outline-none focus:border-[#C9A45C]"
               />
             </div>
 
             <div>
-              <label htmlFor="custom-blessing-input" className="block text-xs font-serif text-[#E8D6A5] mb-1">
+              <label htmlFor="custom-blessing-input" className="block text-sm font-serif font-semibold text-[#E8D6A5] mb-1.5">
                 {t("शुभकामना संदेश (Blessing Message) *", "Blessing Message *")}
               </label>
               <textarea
@@ -240,7 +240,7 @@ export const CongratulationsSection: React.FC = () => {
                 rows={3}
                 required
                 placeholder={t("वर-वधू हेतु अपने मंगल विचार यहाँ लिखें...", "Write your warm wishes for the couple...")}
-                className="w-full px-4 py-2.5 rounded-xl bg-[#1F0309] border border-[#C9A45C]/40 text-[#FFF5DF] placeholder-[#C9A45C]/40 text-sm font-serif focus:outline-none focus:border-[#C9A45C]"
+                className="w-full px-4 py-3 rounded-xl bg-[#1F0309] border border-[#C9A45C]/40 text-[#FFF5DF] placeholder-[#C9A45C]/40 text-base font-serif focus:outline-none focus:border-[#C9A45C]"
               />
             </div>
 
@@ -251,19 +251,19 @@ export const CongratulationsSection: React.FC = () => {
                   setSenderName('');
                   setCustomMessage('');
                 }}
-                className="flex items-center gap-1.5 text-xs text-[#C9A45C]/70 hover:text-[#C9A45C] font-serif cursor-pointer"
+                className="flex items-center gap-1.5 text-sm text-[#C9A45C] hover:text-[#FAF3E0] font-serif cursor-pointer"
               >
-                <Trash2 className="w-3.5 h-3.5" />
+                <Trash2 className="w-4 h-4" />
                 <span>{t("साफ करें", "Clear")}</span>
               </button>
 
               <button
                 type="submit"
                 disabled={!customMessage.trim()}
-                className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#C9A45C] to-[#E8D6A5] text-[#350610] font-serif font-bold text-xs uppercase tracking-wider disabled:opacity-50 cursor-pointer hover:opacity-90 shadow"
+                className="flex items-center gap-2 px-7 py-3 rounded-xl bg-gradient-to-r from-[#C9A45C] to-[#E8D6A5] text-[#350610] font-serif font-bold text-sm uppercase tracking-wider disabled:opacity-50 cursor-pointer hover:opacity-90 shadow-md"
               >
                 <span>{t("आशीर्वाद भेजें", "Send Blessing")}</span>
-                <Send className="w-3.5 h-3.5" />
+                <Send className="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -271,20 +271,20 @@ export const CongratulationsSection: React.FC = () => {
       </div>
 
       {/* Blessings Wall */}
-      <div className="mt-8 max-w-xl mx-auto space-y-3 text-left">
-        <p className="text-xs font-serif uppercase tracking-wider text-[#C9A45C] text-center mb-2">
+      <div className="mt-10 max-w-xl mx-auto space-y-4 text-left">
+        <p className="text-sm font-serif uppercase tracking-wider font-semibold text-[#C9A45C] text-center mb-3">
           {t("सत्र आशीर्वाद डायरी (Session Blessings Wall)", "Live Session Blessings Wall")}
         </p>
         {blessingsList.map((item) => (
           <div
             key={item.id}
-            className="p-4 rounded-xl bg-[#650D1B]/50 border border-[#C9A45C]/30 text-xs sm:text-sm font-serif"
+            className="p-5 rounded-2xl bg-[#650D1B]/55 border border-[#C9A45C]/35 text-sm sm:text-base font-serif shadow-sm"
           >
-            <div className="flex items-center justify-between text-[#C9A45C] mb-1">
-              <span className="font-semibold text-[#FAF3E0]">{item.sender}</span>
-              <span className="text-[10px] text-[#E8D6A5]">{item.timestamp}</span>
+            <div className="flex items-center justify-between text-[#C9A45C] mb-1.5">
+              <span className="font-bold text-[#FAF3E0] text-base">{item.sender}</span>
+              <span className="text-xs text-[#E8D6A5]">{item.timestamp}</span>
             </div>
-            <p className="text-[#FFF5DF]/90 leading-relaxed">{item.message}</p>
+            <p className="text-[#FFF5DF] leading-relaxed font-normal">{item.message}</p>
           </div>
         ))}
       </div>
