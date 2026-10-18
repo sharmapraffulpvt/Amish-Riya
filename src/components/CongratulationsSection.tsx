@@ -125,7 +125,6 @@ export const CongratulationsSection: React.FC = () => {
     { hi: '॥ शुभ विवाह ॥', en: 'Happy Wedding!' },
     { hi: 'ढेर सारा आशीर्वाद', en: 'Countless Blessings' },
     { hi: 'Wishing you a lifetime of happiness ❤️', en: 'Wishing you a lifetime of happiness ❤️' },
-    { hi: 'सदा सुहागिन रहो', en: 'May your bond be eternal' },
     { hi: 'May Lord Ganesha bless your union 🙏', en: 'May Lord Ganesha bless your union 🙏' },
   ];
 
