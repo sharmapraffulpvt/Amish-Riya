@@ -16,7 +16,7 @@ export const HeroGrandReveal: React.FC<HeroGrandRevealProps> = ({
 
   const handleOpen = () => {
     soundManager.tryAutoStart();
-    soundManager.playChime();
+    soundManager.playInvitationOpen();
     onOpenInvitation();
   };
 
