@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, ChevronLeft, ChevronRight, BookOpen } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, BookOpen, Download, ExternalLink, FileText } from 'lucide-react';
 import { soundManager } from '../utils/soundManager';
 import { useLang } from '../context/LanguageContext';
 
@@ -11,28 +11,38 @@ interface OriginalCardViewerProps {
 export const OriginalCardViewer: React.FC<OriginalCardViewerProps> = ({ isOpen, onClose }) => {
   const { t } = useLang();
   const [currentPage, setCurrentPage] = useState<number>(0);
+  const [viewMode, setViewMode] = useState<'pages' | 'pdf'>('pages');
+
+  const pdfUrl = '/Amish_Riya_Wedding_Invitation.pdf';
 
   const pages = [
     {
       title: t(
-        'प्रथम पृष्ठ — शादी का निमंत्रण (Page 1)',
-        'Page 1 — Main Wedding Invitation'
+        'प्रथम पृष्ठ — मंगल निमंत्रण (Page 1)',
+        'Page 1 — Auspicious Cover Invitation'
       ),
       src: '/images/page-1.png',
     },
     {
       title: t(
-        'द्वितीय पृष्ठ — मांगलिक कार्यक्रम (Page 2)',
-        'Page 2 — Auspicious Schedule of Events'
+        'द्वितीय पृष्ठ — शादी का निमंत्रण एवं स्थान (Page 2)',
+        'Page 2 — Wedding Invitation & Venue'
       ),
       src: '/images/page-2.png',
     },
     {
       title: t(
-        'तृतीय पृष्ठ — पाणिग्रहण संस्कार एवं परिवार (Page 3)',
-        'Page 3 — Wedding Ceremony & Family Lineage'
+        'तृतीय पृष्ठ — मांगलिक कार्यक्रम (Page 3)',
+        'Page 3 — Schedule of Auspicious Events'
       ),
       src: '/images/page-3.png',
+    },
+    {
+      title: t(
+        'चतुर्थ पृष्ठ — पाणिग्रहण संस्कार एवं परिवार (Page 4)',
+        'Page 4 — Sacred Ceremony & Family Lineage'
+      ),
+      src: '/images/page-4.png',
     },
   ];
 
@@ -55,62 +65,177 @@ export const OriginalCardViewer: React.FC<OriginalCardViewerProps> = ({ isOpen, 
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-md animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-5 bg-black/90 backdrop-blur-md animate-fade-in"
       onClick={handleClose}
       role="dialog"
       aria-modal="true"
     >
       <div
-        className="relative max-w-2xl w-full max-h-[92vh] flex flex-col items-center bg-[#350610] border-2 border-[#C9A45C] rounded-3xl p-4 sm:p-6 shadow-2xl text-[#FFF5DF] overflow-hidden"
+        className="relative max-w-3xl w-full max-h-[95vh] flex flex-col items-center bg-[#350610] border-2 border-[#C9A45C] rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 shadow-2xl text-[#FFF5DF] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
-        <div className="w-full flex items-center justify-between pb-3 border-b border-[#C9A45C]/40">
+        {/* Header Bar */}
+        <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 pb-3 border-b border-[#C9A45C]/40">
           <div className="flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-[#C9A45C]" />
-            <h3 className="text-sm sm:text-base font-serif font-bold text-[#FAF3E0]">
-              {pages[currentPage].title}
-            </h3>
+            <BookOpen className="w-5 h-5 text-[#C9A45C] shrink-0" />
+            <div>
+              <h3 className="text-sm sm:text-base font-serif font-bold text-[#FAF3E0] leading-tight">
+                {viewMode === 'pages' ? pages[currentPage].title : t('पूर्ण मूल पत्रिका (PDF)', 'Complete Original Invitation (PDF)')}
+              </h3>
+              <p className="text-[11px] text-[#C9A45C] font-mono">
+                Amish_Riya_Wedding_Invitation.pdf
+              </p>
+            </div>
           </div>
-          <button
-            onClick={handleClose}
-            className="p-1.5 rounded-full bg-[#650D1B] border border-[#C9A45C]/50 text-[#FAF3E0] hover:bg-[#831425] transition-colors cursor-pointer"
-          >
-            <X className="w-5 h-5" />
-          </button>
+
+          {/* Action buttons (View mode toggle, Download, Open external, Close) */}
+          <div className="flex items-center gap-1.5 sm:gap-2 self-end sm:self-auto">
+            {/* View Mode Toggle */}
+            <div className="flex items-center bg-[#1F0309] rounded-lg p-0.5 border border-[#C9A45C]/40 text-xs font-serif">
+              <button
+                onClick={() => { soundManager.playClick(); setViewMode('pages'); }}
+                className={`px-2 py-1 rounded-md transition-colors ${
+                  viewMode === 'pages'
+                    ? 'bg-[#650D1B] text-[#FAF3E0] font-semibold'
+                    : 'text-[#FFF5DF]/70 hover:text-[#FAF3E0]'
+                }`}
+              >
+                {t('पृष्ठ', 'Pages')}
+              </button>
+              <button
+                onClick={() => { soundManager.playClick(); setViewMode('pdf'); }}
+                className={`flex items-center gap-1 px-2 py-1 rounded-md transition-colors ${
+                  viewMode === 'pdf'
+                    ? 'bg-[#650D1B] text-[#FAF3E0] font-semibold'
+                    : 'text-[#FFF5DF]/70 hover:text-[#FAF3E0]'
+                }`}
+              >
+                <FileText className="w-3 h-3 text-[#C9A45C]" />
+                <span>PDF</span>
+              </button>
+            </div>
+
+            {/* Direct Open in New Tab */}
+            <a
+              href={pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => soundManager.playClick()}
+              className="p-1.5 rounded-lg bg-[#650D1B] border border-[#C9A45C]/50 text-[#FAF3E0] hover:bg-[#831425] transition-colors cursor-pointer"
+              title={t('नई टैब में PDF खोलें', 'Open PDF in New Tab')}
+            >
+              <ExternalLink className="w-4 h-4 text-[#C9A45C]" />
+            </a>
+
+            {/* Direct Download PDF */}
+            <a
+              href={pdfUrl}
+              download="Amish_Riya_Wedding_Invitation.pdf"
+              onClick={() => soundManager.playClick()}
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#650D1B] border border-[#C9A45C]/60 text-xs font-serif text-[#FAF3E0] hover:bg-[#831425] transition-colors cursor-pointer shadow-sm"
+              title={t('PDF डाउनलोड करें', 'Download PDF')}
+            >
+              <Download className="w-3.5 h-3.5 text-[#C9A45C]" />
+              <span className="hidden sm:inline">{t('डाउनलोड', 'Download')}</span>
+            </a>
+
+            {/* Close Button */}
+            <button
+              onClick={handleClose}
+              className="p-1.5 rounded-full bg-[#650D1B] border border-[#C9A45C]/50 text-[#FAF3E0] hover:bg-[#831425] transition-colors cursor-pointer"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
-        {/* Card Image Display */}
+        {/* Card Display Area */}
         <div className="relative flex-1 w-full my-3 flex items-center justify-center overflow-auto min-h-0">
-          <img
-            src={pages[currentPage].src}
-            alt={pages[currentPage].title}
-            className="max-h-[70vh] w-auto object-contain rounded-xl shadow-lg border border-[#C9A45C]/40"
-          />
+          {viewMode === 'pages' ? (
+            <div className="flex flex-col items-center justify-center w-full h-full">
+              <img
+                src={pages[currentPage].src}
+                alt={pages[currentPage].title}
+                className="max-h-[66vh] sm:max-h-[72vh] w-auto object-contain rounded-xl shadow-2xl border border-[#C9A45C]/50 transition-all duration-300"
+              />
+            </div>
+          ) : (
+            <div className="w-full h-[66vh] sm:h-[72vh] rounded-xl overflow-hidden border border-[#C9A45C]/40 bg-[#1F0309] flex flex-col">
+              <iframe
+                src={`${pdfUrl}#toolbar=1&navpanes=0`}
+                title="Amish & Riya Wedding Invitation PDF"
+                className="w-full flex-1 border-0"
+              />
+              <div className="p-2 text-center text-xs text-[#C9A45C] bg-[#1F0309] border-t border-[#C9A45C]/30 flex items-center justify-center gap-2">
+                <span>{t('PDF सीधे देखने या डाउनलोड करने हेतु:', 'To view full PDF or download:')}</span>
+                <a
+                  href={pdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-[#FAF3E0] font-semibold"
+                >
+                  {t('यहाँ क्लिक करें (Click Here)', 'Open PDF in New Window')}
+                </a>
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Bottom Pagination & Nav */}
-        <div className="w-full flex items-center justify-between pt-2 border-t border-[#C9A45C]/30 text-xs sm:text-sm font-serif">
-          <button
-            onClick={handlePrev}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#650D1B] border border-[#C9A45C]/40 hover:bg-[#831425] transition-colors cursor-pointer"
-          >
-            <ChevronLeft className="w-4 h-4 text-[#C9A45C]" />
-            <span>{t("पिछला पृष्ठ", "Previous")}</span>
-          </button>
+        {/* Bottom Navigation for Pages Mode */}
+        {viewMode === 'pages' ? (
+          <div className="w-full flex items-center justify-between pt-2 border-t border-[#C9A45C]/30 text-xs sm:text-sm font-serif">
+            <button
+              onClick={handlePrev}
+              className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#650D1B] border border-[#C9A45C]/40 hover:bg-[#831425] transition-colors cursor-pointer"
+            >
+              <ChevronLeft className="w-4 h-4 text-[#C9A45C]" />
+              <span>{t('पिछला पृष्ठ', 'Previous')}</span>
+            </button>
 
-          <span className="text-[#C9A45C] font-semibold">
-            {t("पृष्ठ", "Page")} {currentPage + 1} / {pages.length}
-          </span>
+            {/* Quick Page Indicator Dots */}
+            <div className="flex items-center gap-1.5">
+              {pages.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => { soundManager.playClick(); setCurrentPage(idx); }}
+                  className={`h-2 rounded-full transition-all cursor-pointer ${
+                    currentPage === idx
+                      ? 'w-6 bg-[#C9A45C]'
+                      : 'w-2 bg-[#FAF3E0]/30 hover:bg-[#FAF3E0]/60'
+                  }`}
+                  aria-label={`Go to page ${idx + 1}`}
+                />
+              ))}
+              <span className="ml-2 text-[#C9A45C] font-semibold text-xs sm:text-sm">
+                {currentPage + 1} / {pages.length}
+              </span>
+            </div>
 
-          <button
-            onClick={handleNext}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#650D1B] border border-[#C9A45C]/40 hover:bg-[#831425] transition-colors cursor-pointer"
-          >
-            <span>{t("अगला पृष्ठ", "Next")}</span>
-            <ChevronRight className="w-4 h-4 text-[#C9A45C]" />
-          </button>
-        </div>
+            <button
+              onClick={handleNext}
+              className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#650D1B] border border-[#C9A45C]/40 hover:bg-[#831425] transition-colors cursor-pointer"
+            >
+              <span>{t('अगला पृष्ठ', 'Next')}</span>
+              <ChevronRight className="w-4 h-4 text-[#C9A45C]" />
+            </button>
+          </div>
+        ) : (
+          <div className="w-full flex items-center justify-between pt-2 border-t border-[#C9A45C]/30 text-xs sm:text-sm font-serif">
+            <span className="text-[#C9A45C]">
+              {t('आधिकारिक आमंत्रण पत्रिका', 'Official Wedding Invitation PDF')}
+            </span>
+            <a
+              href={pdfUrl}
+              download="Amish_Riya_Wedding_Invitation.pdf"
+              onClick={() => soundManager.playClick()}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#650D1B] border border-[#C9A45C]/50 text-[#FAF3E0] hover:bg-[#831425] transition-colors cursor-pointer"
+            >
+              <Download className="w-4 h-4 text-[#C9A45C]" />
+              <span>{t('PDF डाउनलोड करें', 'Download PDF')}</span>
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );

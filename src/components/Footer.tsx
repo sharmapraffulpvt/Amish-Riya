@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, Sparkles, BookOpen } from 'lucide-react';
+import { Heart, Sparkles, BookOpen, Download } from 'lucide-react';
 import { WEDDING_DATA } from '../data/weddingData';
 import { soundManager } from '../utils/soundManager';
 import { useLang } from '../context/LanguageContext';
@@ -38,15 +38,27 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCardViewer }) => {
           Amish & Riya • {WEDDING_DATA.weddingDate.english}
         </p>
 
-        {/* View Original Cards Button */}
-        <button
-          onClick={handleOpenOriginals}
-          className="inline-flex items-center gap-2.5 px-7 py-3 rounded-full bg-[#650D1B] border border-[#C9A45C] text-[#FAF3E0] text-sm font-serif font-semibold hover:bg-[#831425] transition-all duration-300 shadow-gold-glow mb-8 cursor-pointer hover:scale-105"
-        >
-          <BookOpen className="w-4 h-4 text-[#C9A45C]" />
-          <span>{t("मूल आमंत्रण पत्रिका दर्शन", "View Original Wedding Cards")}</span>
-          <Sparkles className="w-4 h-4 text-[#E8D6A5]" />
-        </button>
+        {/* View Original Cards & PDF Download Buttons */}
+        <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
+          <button
+            onClick={handleOpenOriginals}
+            className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-[#650D1B] border border-[#C9A45C] text-[#FAF3E0] text-sm font-serif font-semibold hover:bg-[#831425] transition-all duration-300 shadow-gold-glow cursor-pointer hover:scale-105"
+          >
+            <BookOpen className="w-4 h-4 text-[#C9A45C]" />
+            <span>{t("मूल आमंत्रण पत्रिका दर्शन", "View Original Wedding Cards")}</span>
+            <Sparkles className="w-4 h-4 text-[#E8D6A5]" />
+          </button>
+
+          <a
+            href="/Amish_Riya_Wedding_Invitation.pdf"
+            download="Amish_Riya_Wedding_Invitation.pdf"
+            onClick={() => soundManager.playClick()}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1F0309] border border-[#C9A45C]/70 text-[#FAF3E0] text-sm font-serif font-semibold hover:bg-[#650D1B] transition-all duration-300 cursor-pointer hover:scale-105"
+          >
+            <Download className="w-4 h-4 text-[#C9A45C]" />
+            <span>{t("PDF डाउनलोड करें", "Download PDF Invitation")}</span>
+          </a>
+        </div>
 
         <div className="h-[1px] w-48 bg-gradient-to-r from-transparent via-[#C9A45C] to-transparent mb-6" />
 

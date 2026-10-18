@@ -120,6 +120,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCardViewer, onReturnToHero
             </button>
           ))}
           <button
+            onClick={handleOpenOriginals}
+            className="w-full text-left py-2 px-3 rounded-lg text-sm font-serif text-[#E8D6A5] hover:bg-[#650D1B] transition-colors flex items-center justify-between"
+          >
+            <span>{t('मूल आमंत्रण पत्रिका (PDF)', 'Original Card (PDF)')}</span>
+            <BookOpen className="w-3.5 h-3.5 text-[#C9A45C]" />
+          </button>
+          <button
             onClick={handleCoverClick}
             className="w-full text-left py-2 px-3 rounded-lg text-sm font-serif text-[#C9A45C] hover:bg-[#650D1B] transition-colors"
           >
