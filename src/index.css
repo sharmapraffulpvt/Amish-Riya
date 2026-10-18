@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-burgundy-dark: #350610;
+  --color-burgundy-deep: #650D1B;
+  --color-gold-antique: #C9A45C;
+  --color-gold-champagne: #E8D6A5;
+  --color-ivory: #FFF5DF;
+}
+
+/* Custom Gold Foil Text Gradient */
+.gold-text-gradient {
+  background: linear-gradient(135deg, #F4E4BD 0%, #C9A45C 35%, #FFF5DF 60%, #B08842 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-foil-border {
+  border-image: linear-gradient(to bottom right, #FAF3E0, #C9A45C, #684A1A, #E8D6A5) 1;
+}
+
+.gold-box-glow {
+  box-shadow: 0 0 25px rgba(201, 164, 92, 0.3), inset 0 0 15px rgba(201, 164, 92, 0.15);
+}
+
+.gold-box-glow-hover:hover {
+  box-shadow: 0 0 35px rgba(232, 214, 165, 0.5), inset 0 0 20px rgba(201, 164, 92, 0.25);
+}
+
+/* Mughal Scalloped Arch Shape */
+.mughal-arch-container {
+  border-top-left-radius: 50% 30%;
+  border-top-right-radius: 50% 30%;
+}
+
+/* Diya Flame Flicker */
+@keyframes flameFlicker {
+  0%, 100% {
+    transform: scale(1) rotate(-1deg);
+    opacity: 0.95;
+    filter: drop-shadow(0 -4px 10px rgba(255, 170, 50, 0.8));
+  }
+  25% {
+    transform: scale(1.04) rotate(1.5deg);
+    opacity: 1;
+    filter: drop-shadow(0 -6px 14px rgba(255, 200, 80, 0.95));
+  }
+  50% {
+    transform: scale(0.96) rotate(-0.5deg);
+    opacity: 0.9;
+    filter: drop-shadow(0 -3px 8px rgba(240, 140, 30, 0.75));
+  }
+  75% {
+    transform: scale(1.02) rotate(1deg);
+    opacity: 0.98;
+    filter: drop-shadow(0 -5px 12px rgba(255, 190, 60, 0.9));
+  }
+}
+
+.animate-diya {
+  animation: flameFlicker 2.8s infinite ease-in-out;
+}
+
+/* Subtle Shimmer Overlay */
+.luxury-shimmer-sweep {
+  position: relative;
+  overflow: hidden;
+}
+.luxury-shimmer-sweep::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 20%,
+    rgba(232, 214, 165, 0.15) 50%,
+    transparent 80%
+  );
+  transform: rotate(30deg);
+  animation: shimmerSweep 7s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes shimmerSweep {
+  0% { transform: translateY(-100%) rotate(30deg); }
+  40% { transform: translateY(100%) rotate(30deg); }
+  100% { transform: translateY(100%) rotate(30deg); }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #350610;
+}
+::-webkit-scrollbar-thumb {
+  background: #C9A45C;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E8D6A5;
+}
