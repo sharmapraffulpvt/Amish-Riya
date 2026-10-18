@@ -46,7 +46,7 @@ export const GroomBrideSection: React.FC = () => {
                   <img
                     src="/images/amish-groom.png"
                     alt={t(WEDDING_DATA.groom.name, WEDDING_DATA.groom.englishName)}
-                    className="w-full h-full object-cover object-[center_15%] transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-[#350610] border border-[#C9A45C] shadow text-[10px] text-[#FAF3E0] font-serif uppercase tracking-wider">
