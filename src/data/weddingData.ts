@@ -30,12 +30,14 @@ export interface WeddingConfig {
     parents: string;
     parentsDetails: string;
     grandfather?: string;
+    photoUrl?: string;
   };
   bride: {
     name: string;
     englishName: string;
     parents: string;
     parentsDetails: string;
+    photoUrl?: string;
   };
   weddingDate: {
     hindi: string;
@@ -74,13 +76,15 @@ export const WEDDING_DATA: WeddingConfig = {
     name: "श्री अमीश शर्मा",
     englishName: "Amish Sharma",
     parents: "श्री अनिल शर्मा एवं श्रीमती वंदना शर्मा",
-    parentsDetails: "सुपुत्र श्री अनिल शर्मा एवं श्रीमती वंदना शर्मा"
+    parentsDetails: "सुपुत्र श्री अनिल शर्मा एवं श्रीमती वंदना शर्मा",
+    photoUrl: "/images/amish-groom.png"
   },
   bride: {
     name: "सुश्री रिया भारद्वाज",
     englishName: "Riya Bhardwaj",
     parents: "श्री मिथलेश भारद्वाज एवं श्रीमती रेखा भारद्वाज",
-    parentsDetails: "सुपुत्री श्री मिथलेश भारद्वाज एवं श्रीमती रेखा भारद्वाज"
+    parentsDetails: "सुपुत्री श्री मिथलेश भारद्वाज एवं श्रीमती रेखा भारद्वाज",
+    photoUrl: "/images/riya-bride.png"
   },
   weddingDate: {
     hindi: "गुरुवार, 3 दिसंबर 2026",

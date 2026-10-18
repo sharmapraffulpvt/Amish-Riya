@@ -41,13 +41,16 @@ export const GroomBrideSection: React.FC = () => {
                 {t('॥ वर (Groom) ॥', '॥ Groom ॥')}
               </div>
 
-              <div className="relative w-36 h-36 sm:w-44 sm:h-44 mx-auto mb-6 rounded-full p-1.5 bg-gradient-to-tr from-[#FAF3E0] via-[#C9A45C] to-[#8C672B] shadow-gold-glow">
-                <div className="w-full h-full rounded-full overflow-hidden bg-[#350610] border-2 border-[#FAF3E0]/70 flex items-center justify-center">
-                  <div className="relative w-full h-full flex flex-col items-center justify-center text-center p-3 bg-gradient-to-b from-[#650D1B] to-[#1F0309]">
-                    <span className="text-4xl sm:text-5xl mb-1">👑</span>
-                    <span className="text-xs font-serif text-[#FAF3E0]">{t('दूल्हा', 'Groom')}</span>
-                    <span className="text-[10px] text-[#C9A45C] uppercase">Royal Groom</span>
-                  </div>
+              <div className="relative w-40 h-40 sm:w-48 sm:h-48 mx-auto mb-6 rounded-full p-1.5 bg-gradient-to-tr from-[#FAF3E0] via-[#C9A45C] to-[#8C672B] shadow-gold-glow">
+                <div className="w-full h-full rounded-full overflow-hidden bg-[#350610] border-2 border-[#FAF3E0]/80 shadow-inner">
+                  <img
+                    src="/images/amish-groom.png"
+                    alt={t(WEDDING_DATA.groom.name, WEDDING_DATA.groom.englishName)}
+                    className="w-full h-full object-cover object-[center_15%] transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-[#350610] border border-[#C9A45C] shadow text-[10px] text-[#FAF3E0] font-serif uppercase tracking-wider">
+                  {t('दूल्हा', 'Groom')}
                 </div>
               </div>
 
@@ -82,13 +85,16 @@ export const GroomBrideSection: React.FC = () => {
                 {t('॥ वधू (Bride) ॥', '॥ Bride ॥')}
               </div>
 
-              <div className="relative w-36 h-36 sm:w-44 sm:h-44 mx-auto mb-6 rounded-full p-1.5 bg-gradient-to-tr from-[#FAF3E0] via-[#C9A45C] to-[#8C672B] shadow-gold-glow">
-                <div className="w-full h-full rounded-full overflow-hidden bg-[#350610] border-2 border-[#FAF3E0]/70 flex items-center justify-center">
-                  <div className="relative w-full h-full flex flex-col items-center justify-center text-center p-3 bg-gradient-to-b from-[#650D1B] to-[#1F0309]">
-                    <span className="text-4xl sm:text-5xl mb-1">✨</span>
-                    <span className="text-xs font-serif text-[#FAF3E0]">{t('दुल्हन', 'Bride')}</span>
-                    <span className="text-[10px] text-[#C9A45C] uppercase">Royal Bride</span>
-                  </div>
+              <div className="relative w-40 h-40 sm:w-48 sm:h-48 mx-auto mb-6 rounded-full p-1.5 bg-gradient-to-tr from-[#FAF3E0] via-[#C9A45C] to-[#8C672B] shadow-gold-glow">
+                <div className="w-full h-full rounded-full overflow-hidden bg-[#350610] border-2 border-[#FAF3E0]/80 shadow-inner">
+                  <img
+                    src="/images/riya-bride.png"
+                    alt={t(WEDDING_DATA.bride.name, WEDDING_DATA.bride.englishName)}
+                    className="w-full h-full object-cover object-[center_18%] transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-[#350610] border border-[#C9A45C] shadow text-[10px] text-[#FAF3E0] font-serif uppercase tracking-wider">
+                  {t('दुल्हन', 'Bride')}
                 </div>
               </div>
 
