@@ -149,12 +149,12 @@ export const CongratulationsSection: React.FC = () => {
       <div className="mt-8 flex flex-col items-center justify-center gap-3">
         <button
           onClick={handleMainCongrats}
-          className="relative group overflow-hidden px-8 sm:px-14 py-5 rounded-full bg-gradient-to-r from-[#C9A45C] via-[#FAF3E0] to-[#C9A45C] text-[#350610] font-serif font-bold text-lg sm:text-xl tracking-wider shadow-gold-glow transition-all duration-300 hover:scale-105 hover:shadow-gold-glow-lg active:scale-95 cursor-pointer"
+          className="relative group overflow-hidden w-full max-w-sm sm:max-w-none sm:w-auto px-5 sm:px-14 py-4 sm:py-5 rounded-full bg-gradient-to-r from-[#C9A45C] via-[#FAF3E0] to-[#C9A45C] text-[#350610] font-serif font-bold text-base sm:text-xl tracking-wider shadow-gold-glow transition-all duration-300 hover:scale-105 hover:shadow-gold-glow-lg active:scale-95 cursor-pointer"
         >
-          <span className="relative z-10 flex items-center gap-3">
-            <Heart className="w-6 h-6 text-[#650D1B] fill-[#650D1B] animate-pulse" />
+          <span className="relative z-10 flex items-center justify-center gap-2.5 sm:gap-3">
+            <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-[#650D1B] fill-[#650D1B] animate-pulse shrink-0" />
             <span>{t("बधाई हो अमीश एवं रिया ❤️", "Congratulations Amish & Riya ❤️")}</span>
-            <Sparkles className="w-5 h-5 text-[#8C672B]" />
+            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#8C672B] shrink-0" />
           </span>
           <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 pointer-events-none" />
         </button>

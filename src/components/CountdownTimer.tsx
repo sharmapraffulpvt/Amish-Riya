@@ -61,26 +61,26 @@ export const CountdownTimer: React.FC = () => {
           </h3>
 
           {timeLeft.isPast ? (
-            <div className="py-8 px-6 bg-[#650D1B]/60 rounded-2xl border border-[#C9A45C] text-[#FFF5DF] flex flex-col items-center justify-center gap-3">
-              <Sparkles className="w-10 h-10 text-[#E8D6A5] animate-pulse" />
-              <p className="text-2xl sm:text-4xl font-serif text-[#FAF3E0] font-bold">
+            <div className="py-6 sm:py-8 px-4 sm:px-6 bg-[#650D1B]/60 rounded-2xl border border-[#C9A45C] text-[#FFF5DF] flex flex-col items-center justify-center gap-3">
+              <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-[#E8D6A5] animate-pulse" />
+              <p className="text-xl sm:text-4xl font-serif text-[#FAF3E0] font-bold">
                 {t('मंगल विवाहोत्सव जारी है!', 'The Celebration Has Begun!')}
               </p>
-              <p className="text-base sm:text-lg text-[#C9A45C] font-serif font-medium">
+              <p className="text-sm sm:text-lg text-[#C9A45C] font-serif font-medium">
                 {t('अमीश एवं रिया के शुभ विवाह की मंगल बेला', 'Celebrating the divine union of Amish & Riya')}
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-2xl mx-auto">
+            <div className="grid grid-cols-4 gap-2 xs:gap-3 sm:gap-6 max-w-2xl mx-auto">
               {timeBlocks.map((block, idx) => (
                 <div
                   key={idx}
-                  className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-b from-[#650D1B]/80 to-[#350610]/90 border border-[#C9A45C]/50 shadow-gold-glow flex flex-col items-center justify-center transform transition-transform hover:-translate-y-1"
+                  className="relative p-2.5 xs:p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-b from-[#650D1B]/80 to-[#350610]/90 border border-[#C9A45C]/50 shadow-gold-glow flex flex-col items-center justify-center transform transition-transform hover:-translate-y-1"
                 >
-                  <span className="text-4xl sm:text-6xl font-bold font-serif text-transparent bg-clip-text bg-gradient-to-b from-[#FAF3E0] to-[#C9A45C] tabular-nums">
+                  <span className="text-2xl xs:text-3xl sm:text-5xl md:text-6xl font-bold font-serif text-transparent bg-clip-text bg-gradient-to-b from-[#FAF3E0] to-[#C9A45C] tabular-nums leading-none">
                     {String(block.value).padStart(2, '0')}
                   </span>
-                  <span className="mt-2 text-base sm:text-lg font-serif text-[#FFF5DF] font-semibold">{block.label}</span>
+                  <span className="mt-1.5 sm:mt-2 text-[11px] xs:text-xs sm:text-base font-serif text-[#FFF5DF] font-semibold leading-tight">{block.label}</span>
                 </div>
               ))}
             </div>

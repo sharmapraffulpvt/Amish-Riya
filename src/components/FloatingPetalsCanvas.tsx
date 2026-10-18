@@ -28,14 +28,17 @@ export const FloatingPetalsCanvas: React.FC = () => {
 
     const handleResize = () => {
       if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      // Prevent canvas flicker on mobile address bar collapse/expand
+      if (Math.abs(canvas.width - window.innerWidth) > 20 || Math.abs(canvas.height - window.innerHeight) > 100) {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }
     };
 
     window.addEventListener('resize', handleResize);
 
-    // Create particles (balanced for high performance on all devices)
-    const particleCount = window.innerWidth < 768 ? 28 : 45;
+    // Create particles (optimized for smooth 60-120fps on mobile phones)
+    const particleCount = window.innerWidth < 768 ? 16 : 40;
     const particles: Petal[] = [];
 
     const types: ('petal-burgundy' | 'petal-blush' | 'gold-particle' | 'gold-shimmer')[] = [

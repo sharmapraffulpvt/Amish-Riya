@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { X, ChevronLeft, ChevronRight, BookOpen, Download, ExternalLink, FileText } from 'lucide-react';
 import { soundManager } from '../utils/soundManager';
 import { useLang } from '../context/LanguageContext';
@@ -12,6 +12,9 @@ export const OriginalCardViewer: React.FC<OriginalCardViewerProps> = ({ isOpen, 
   const { t } = useLang();
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [viewMode, setViewMode] = useState<'pages' | 'pdf'>('pages');
+
+  const touchStartXRef = useRef<number | null>(null);
+  const touchEndXRef = useRef<number | null>(null);
 
   const pdfUrl = '/Amish_Riya_Wedding_Invitation.pdf';
 
@@ -63,6 +66,33 @@ export const OriginalCardViewer: React.FC<OriginalCardViewerProps> = ({ isOpen, 
     onClose();
   };
 
+  // Mobile Touch Swipe Handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.targetTouches[0].clientX;
+    touchEndXRef.current = null;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndXRef.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartXRef.current === null || touchEndXRef.current === null) return;
+    const diff = touchStartXRef.current - touchEndXRef.current;
+    const minSwipeDistance = 45; // px
+
+    if (diff > minSwipeDistance) {
+      // Swiped left -> next page
+      handleNext();
+    } else if (diff < -minSwipeDistance) {
+      // Swiped right -> prev page
+      handlePrev();
+    }
+
+    touchStartXRef.current = null;
+    touchEndXRef.current = null;
+  };
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-5 bg-black/90 backdrop-blur-md animate-fade-in"
@@ -71,30 +101,30 @@ export const OriginalCardViewer: React.FC<OriginalCardViewerProps> = ({ isOpen, 
       aria-modal="true"
     >
       <div
-        className="relative max-w-3xl w-full max-h-[95vh] flex flex-col items-center bg-[#350610] border-2 border-[#C9A45C] rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 shadow-2xl text-[#FFF5DF] overflow-hidden"
+        className="relative max-w-3xl w-full max-h-[94dvh] flex flex-col items-center bg-[#350610] border-2 border-[#C9A45C] rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-2xl text-[#FFF5DF] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Bar */}
-        <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 pb-3 border-b border-[#C9A45C]/40">
+        <div className="w-full flex flex-col xs:flex-row items-start xs:items-center justify-between gap-2 pb-2.5 border-b border-[#C9A45C]/40">
           <div className="flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-[#C9A45C] shrink-0" />
+            <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-[#C9A45C] shrink-0" />
             <div>
-              <h3 className="text-sm sm:text-base font-serif font-bold text-[#FAF3E0] leading-tight">
+              <h3 className="text-xs sm:text-base font-serif font-bold text-[#FAF3E0] leading-tight">
                 {viewMode === 'pages' ? pages[currentPage].title : t('पूर्ण मूल पत्रिका (PDF)', 'Complete Original Invitation (PDF)')}
               </h3>
-              <p className="text-[11px] text-[#C9A45C] font-mono">
+              <p className="text-[10px] sm:text-[11px] text-[#C9A45C] font-mono leading-none mt-0.5">
                 Amish_Riya_Wedding_Invitation.pdf
               </p>
             </div>
           </div>
 
           {/* Action buttons (View mode toggle, Download, Open external, Close) */}
-          <div className="flex items-center gap-1.5 sm:gap-2 self-end sm:self-auto">
+          <div className="flex items-center gap-1.5 sm:gap-2 self-end xs:self-auto">
             {/* View Mode Toggle */}
             <div className="flex items-center bg-[#1F0309] rounded-lg p-0.5 border border-[#C9A45C]/40 text-xs font-serif">
               <button
                 onClick={() => { soundManager.playClick(); setViewMode('pages'); }}
-                className={`px-2 py-1 rounded-md transition-colors ${
+                className={`px-2 py-1 rounded-md transition-colors cursor-pointer ${
                   viewMode === 'pages'
                     ? 'bg-[#650D1B] text-[#FAF3E0] font-semibold'
                     : 'text-[#FFF5DF]/70 hover:text-[#FAF3E0]'
@@ -104,7 +134,7 @@ export const OriginalCardViewer: React.FC<OriginalCardViewerProps> = ({ isOpen, 
               </button>
               <button
                 onClick={() => { soundManager.playClick(); setViewMode('pdf'); }}
-                className={`flex items-center gap-1 px-2 py-1 rounded-md transition-colors ${
+                className={`flex items-center gap-1 px-2 py-1 rounded-md transition-colors cursor-pointer ${
                   viewMode === 'pdf'
                     ? 'bg-[#650D1B] text-[#FAF3E0] font-semibold'
                     : 'text-[#FFF5DF]/70 hover:text-[#FAF3E0]'
@@ -121,10 +151,10 @@ export const OriginalCardViewer: React.FC<OriginalCardViewerProps> = ({ isOpen, 
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => soundManager.playClick()}
-              className="p-1.5 rounded-lg bg-[#650D1B] border border-[#C9A45C]/50 text-[#FAF3E0] hover:bg-[#831425] transition-colors cursor-pointer"
+              className="p-1.5 sm:p-2 rounded-lg bg-[#650D1B] border border-[#C9A45C]/50 text-[#FAF3E0] hover:bg-[#831425] transition-colors cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center"
               title={t('नई टैब में PDF खोलें', 'Open PDF in New Tab')}
             >
-              <ExternalLink className="w-4 h-4 text-[#C9A45C]" />
+              <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C9A45C]" />
             </a>
 
             {/* Direct Download PDF */}
@@ -132,7 +162,7 @@ export const OriginalCardViewer: React.FC<OriginalCardViewerProps> = ({ isOpen, 
               href={pdfUrl}
               download="Amish_Riya_Wedding_Invitation.pdf"
               onClick={() => soundManager.playClick()}
-              className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#650D1B] border border-[#C9A45C]/60 text-xs font-serif text-[#FAF3E0] hover:bg-[#831425] transition-colors cursor-pointer shadow-sm"
+              className="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg bg-[#650D1B] border border-[#C9A45C]/60 text-xs font-serif text-[#FAF3E0] hover:bg-[#831425] transition-colors cursor-pointer shadow-sm min-h-[36px]"
               title={t('PDF डाउनलोड करें', 'Download PDF')}
             >
               <Download className="w-3.5 h-3.5 text-[#C9A45C]" />
@@ -142,26 +172,35 @@ export const OriginalCardViewer: React.FC<OriginalCardViewerProps> = ({ isOpen, 
             {/* Close Button */}
             <button
               onClick={handleClose}
-              className="p-1.5 rounded-full bg-[#650D1B] border border-[#C9A45C]/50 text-[#FAF3E0] hover:bg-[#831425] transition-colors cursor-pointer"
+              className="p-1.5 sm:p-2 rounded-full bg-[#650D1B] border border-[#C9A45C]/50 text-[#FAF3E0] hover:bg-[#831425] transition-colors cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center"
               aria-label="Close"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </div>
         </div>
 
-        {/* Card Display Area */}
-        <div className="relative flex-1 w-full my-3 flex items-center justify-center overflow-auto min-h-0">
+        {/* Card Display Area (With Mobile Swipe Support) */}
+        <div
+          className="relative flex-1 w-full my-2 flex items-center justify-center overflow-hidden min-h-0 touch-pan-y"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           {viewMode === 'pages' ? (
-            <div className="flex flex-col items-center justify-center w-full h-full">
+            <div className="relative flex flex-col items-center justify-center w-full h-full select-none">
               <img
                 src={pages[currentPage].src}
                 alt={pages[currentPage].title}
-                className="max-h-[66vh] sm:max-h-[72vh] w-auto object-contain rounded-xl shadow-2xl border border-[#C9A45C]/50 transition-all duration-300"
+                className="max-h-[60dvh] xs:max-h-[65dvh] sm:max-h-[72dvh] w-auto max-w-full object-contain rounded-xl shadow-2xl border border-[#C9A45C]/50 transition-all duration-300"
+                draggable={false}
               />
+              <span className="mt-1 text-[10px] text-[#C9A45C]/80 font-serif sm:hidden">
+                {t('← स्वाइप कर पृष्ठ बदलें →', '← Swipe left/right to turn page →')}
+              </span>
             </div>
           ) : (
-            <div className="w-full h-[66vh] sm:h-[72vh] rounded-xl overflow-hidden border border-[#C9A45C]/40 bg-[#1F0309] flex flex-col">
+            <div className="w-full h-[60dvh] xs:h-[65dvh] sm:h-[72dvh] rounded-xl overflow-hidden border border-[#C9A45C]/40 bg-[#1F0309] flex flex-col">
               <iframe
                 src={`${pdfUrl}#toolbar=1&navpanes=0`}
                 title="Amish & Riya Wedding Invitation PDF"
@@ -187,10 +226,10 @@ export const OriginalCardViewer: React.FC<OriginalCardViewerProps> = ({ isOpen, 
           <div className="w-full flex items-center justify-between pt-2 border-t border-[#C9A45C]/30 text-xs sm:text-sm font-serif">
             <button
               onClick={handlePrev}
-              className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#650D1B] border border-[#C9A45C]/40 hover:bg-[#831425] transition-colors cursor-pointer"
+              className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#650D1B] border border-[#C9A45C]/40 hover:bg-[#831425] transition-colors cursor-pointer min-h-[36px]"
             >
               <ChevronLeft className="w-4 h-4 text-[#C9A45C]" />
-              <span>{t('पिछला पृष्ठ', 'Previous')}</span>
+              <span className="hidden xs:inline">{t('पिछला', 'Prev')}</span>
             </button>
 
             {/* Quick Page Indicator Dots */}
@@ -199,40 +238,40 @@ export const OriginalCardViewer: React.FC<OriginalCardViewerProps> = ({ isOpen, 
                 <button
                   key={idx}
                   onClick={() => { soundManager.playClick(); setCurrentPage(idx); }}
-                  className={`h-2 rounded-full transition-all cursor-pointer ${
+                  className={`h-2.5 rounded-full transition-all cursor-pointer ${
                     currentPage === idx
                       ? 'w-6 bg-[#C9A45C]'
-                      : 'w-2 bg-[#FAF3E0]/30 hover:bg-[#FAF3E0]/60'
+                      : 'w-2.5 bg-[#FAF3E0]/30 hover:bg-[#FAF3E0]/60'
                   }`}
                   aria-label={`Go to page ${idx + 1}`}
                 />
               ))}
-              <span className="ml-2 text-[#C9A45C] font-semibold text-xs sm:text-sm">
-                {currentPage + 1} / {pages.length}
+              <span className="ml-1.5 text-[#C9A45C] font-semibold text-xs sm:text-sm">
+                {currentPage + 1}/{pages.length}
               </span>
             </div>
 
             <button
               onClick={handleNext}
-              className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#650D1B] border border-[#C9A45C]/40 hover:bg-[#831425] transition-colors cursor-pointer"
+              className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#650D1B] border border-[#C9A45C]/40 hover:bg-[#831425] transition-colors cursor-pointer min-h-[36px]"
             >
-              <span>{t('अगला पृष्ठ', 'Next')}</span>
+              <span className="hidden xs:inline">{t('अगला', 'Next')}</span>
               <ChevronRight className="w-4 h-4 text-[#C9A45C]" />
             </button>
           </div>
         ) : (
           <div className="w-full flex items-center justify-between pt-2 border-t border-[#C9A45C]/30 text-xs sm:text-sm font-serif">
-            <span className="text-[#C9A45C]">
-              {t('आधिकारिक आमंत्रण पत्रिका', 'Official Wedding Invitation PDF')}
+            <span className="text-[#C9A45C] text-xs">
+              {t('आधिकारिक आमंत्रण पत्रिका (PDF)', 'Official Wedding Invitation (PDF)')}
             </span>
             <a
               href={pdfUrl}
               download="Amish_Riya_Wedding_Invitation.pdf"
               onClick={() => soundManager.playClick()}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#650D1B] border border-[#C9A45C]/50 text-[#FAF3E0] hover:bg-[#831425] transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#650D1B] border border-[#C9A45C]/50 text-[#FAF3E0] hover:bg-[#831425] transition-colors cursor-pointer min-h-[36px]"
             >
-              <Download className="w-4 h-4 text-[#C9A45C]" />
-              <span>{t('PDF डाउनलोड करें', 'Download PDF')}</span>
+              <Download className="w-3.5 h-3.5 text-[#C9A45C]" />
+              <span>{t('PDF डाउनलोड', 'Download PDF')}</span>
             </a>
           </div>
         )}

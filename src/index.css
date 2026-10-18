@@ -106,3 +106,30 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #E8D6A5;
 }
+
+/* Mobile & Browser Compatibility Enhancements */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  touch-action: manipulation;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Touch target minimum size utility */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Smooth mobile modal scroll */
+.mobile-scroll-container {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}

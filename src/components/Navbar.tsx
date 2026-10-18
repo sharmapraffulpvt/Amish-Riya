@@ -42,24 +42,24 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCardViewer, onReturnToHero
 
   return (
     <nav className="sticky top-0 z-40 w-full bg-[#350610]/95 backdrop-blur-md border-b border-[#C9A45C]/40 shadow-burgundy-deep">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-3.5 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
 
         {/* Brand */}
         <div
           onClick={handleCoverClick}
-          className="flex items-center gap-2.5 cursor-pointer group"
+          className="flex items-center gap-2 sm:gap-2.5 cursor-pointer group"
           title={t('मुखपृष्ठ पर लौटें', 'Return to Cover')}
         >
           <img
             src="/ganesha-icon.svg"
             alt="Ganesha"
-            className="w-8 h-8 object-contain transition-transform group-hover:scale-110"
+            className="w-7 h-7 sm:w-8 sm:h-8 object-contain transition-transform group-hover:scale-110"
           />
           <div className="flex flex-col text-left">
-            <span className="font-serif text-base sm:text-lg font-bold text-[#FAF3E0] tracking-wide leading-tight group-hover:text-[#E8D6A5] transition-colors">
+            <span className="font-serif text-sm sm:text-lg font-bold text-[#FAF3E0] tracking-wide leading-tight group-hover:text-[#E8D6A5] transition-colors">
               {lang === 'hi' ? 'अमीश एवं रिया' : 'Amish & Riya'}
             </span>
-            <span className="text-[10px] text-[#C9A45C] font-serif uppercase tracking-widest leading-none">
+            <span className="text-[9px] sm:text-[10px] text-[#C9A45C] font-serif uppercase tracking-widest leading-none">
               3 Dec 2026
             </span>
           </div>
@@ -86,18 +86,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCardViewer, onReturnToHero
           </button>
         </div>
 
-        {/* Mobile Controls */}
+        {/* Mobile Controls (min 42px touch target) */}
         <div className="md:hidden flex items-center gap-2">
           <button
             onClick={handleOpenOriginals}
-            className="p-1.5 rounded-full bg-[#650D1B] border border-[#C9A45C]/50 text-[#FAF3E0]"
+            className="p-2 rounded-full bg-[#650D1B] border border-[#C9A45C]/50 text-[#FAF3E0] min-w-[42px] min-h-[42px] flex items-center justify-center cursor-pointer active:scale-95 transition-transform"
             title={t('मूल पत्रिका', 'Original Card')}
           >
             <BookOpen className="w-4 h-4 text-[#C9A45C]" />
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg bg-[#650D1B] border border-[#C9A45C]/60 text-[#FAF3E0] cursor-pointer"
+            className="p-2 rounded-lg bg-[#650D1B] border border-[#C9A45C]/60 text-[#FAF3E0] min-w-[42px] min-h-[42px] flex items-center justify-center cursor-pointer active:scale-95 transition-transform"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

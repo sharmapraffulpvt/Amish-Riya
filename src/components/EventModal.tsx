@@ -51,17 +51,17 @@ export const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm overflow-y-auto"
       onClick={handleClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
     >
       <div
-        className="relative max-w-lg w-full p-1 rounded-3xl bg-gradient-to-b from-[#FAF3E0] via-[#C9A45C] to-[#8C672B] shadow-2xl"
+        className="relative max-w-lg w-full max-h-[92dvh] flex flex-col p-1 rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#FAF3E0] via-[#C9A45C] to-[#8C672B] shadow-2xl my-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="bg-[#350610] rounded-[22px] p-6 sm:p-8 text-[#FFF5DF] border border-[#C9A45C]/50 relative overflow-hidden">
+        <div className="bg-[#350610] rounded-[20px] sm:rounded-[22px] p-5 sm:p-8 text-[#FFF5DF] border border-[#C9A45C]/50 relative overflow-y-auto max-h-[90dvh]">
 
           {/* Close */}
           <button
