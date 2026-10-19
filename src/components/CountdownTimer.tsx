@@ -153,8 +153,8 @@ export const CountdownTimer: React.FC = () => {
           <p className="mt-7 text-sm sm:text-base text-[#FAF3E0] font-serif font-medium tracking-wide">
             {activeEvent === 'wedding'
               ? t(
-                  '३ दिसंबर २०२६ — ४ दिसंबर प्रातः ०५:०० बजे पवित्र मंगल फेरे',
-                  '3 December 2026 — Sacred Mangal Phere at 5:00 AM on 4 December'
+                  'गुरुवार, ३ दिसंबर २०२६ — होटल मुकुट रीजेंसी, वसुंधरा, गाजियाबाद (४ दिसंबर प्रातः ०५:०० बजे मंगल फेरे)',
+                  'Thursday, 3 December 2026 — Hotel Mukut Regency, Vasundhara, Ghaziabad (Mangal Phere at 5:00 AM on 4 Dec)'
                 )
               : t(
                   'शनिवार, ५ दिसंबर २०२६ — शाम ०७:०० बजे होटल ग्रैंड मर्क्युरी, सूर्य पैलेस, वड़ोदरा',
@@ -173,7 +173,7 @@ export const CountdownTimer: React.FC = () => {
                       {t('आगामी कार्यक्रम:', 'Upcoming Event:')}
                     </span>
                     <span className="text-sm font-serif font-bold text-[#FFF5DF]">
-                      {t('प्रीति भोज (रिसेप्शन): 5 दिसंबर, शाम 07:00 बजे', 'Reception: 5th Dec, 07:00 PM')}
+                      {t('प्रीति भोज (रिसेप्शन): 5 दिसंबर, शाम 07:00 बजे — वड़ोदरा', 'Reception: 5th Dec, 07:00 PM — Vadodara')}
                     </span>
                   </div>
                 </>
@@ -185,7 +185,7 @@ export const CountdownTimer: React.FC = () => {
                       {t('मुख्य विवाह कार्यक्रम:', 'Main Wedding Ceremony:')}
                     </span>
                     <span className="text-sm font-serif font-bold text-[#FFF5DF]">
-                      {t('शुभ विवाह मुहूर्त: 3-4 दिसंबर 2026', 'Wedding Ceremony: 3-4 Dec 2026')}
+                      {t('शुभ विवाह एवं मंगल फेरे: 3-4 दिसंबर — होटल मुकुट रीजेंसी, गाजियाबाद', 'Wedding & Mangal Phere: 3-4 Dec — Hotel Mukut Regency, Ghaziabad')}
                     </span>
                   </div>
                 </>

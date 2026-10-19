@@ -2,10 +2,17 @@ export interface WeddingLocation {
   id: 'HOME' | 'WEDDING' | 'RECEPTION';
   name: string;
   nameEn: string;
+  subName?: string;
+  subNameEn?: string;
   address: string | null;
   mapQuery: string | null;
   isConfirmed: boolean;
   unconfirmedMessage?: string;
+  metroInfo?: string;
+  metroInfoEn?: string;
+  phone?: string;
+  website?: string;
+  imageUrl?: string;
 }
 
 export interface WeddingEvent {
@@ -123,13 +130,18 @@ export const WEDDING_DATA: WeddingConfig = {
     },
     WEDDING: {
       id: 'WEDDING',
-      name: 'मंगल फेरे विवाह स्थल (Wedding Venue)',
-      nameEn: 'Wedding Ceremony Venue',
-      // Explicitly null until venue confirmed as instructed
-      address: null,
-      mapQuery: null,
-      isConfirmed: false,
-      unconfirmedMessage: 'Wedding venue details will be updated soon / विवाह स्थल का विवरण शीघ्र ही साझा किया जाएगा।'
+      name: 'होटल मुकुट रीजेंसी (Hotel Mukut Regency)',
+      nameEn: 'Hotel Mukut Regency',
+      subName: 'अ यूनिट ऑफ जानकी महल होटल प्रा. लि. (वुडबरी कैफे)',
+      subNameEn: 'A Unit of Janki Mahal Hotel Pvt. Ltd. (Woodburry Cafe)',
+      address: 'CC-1, Sector-13, Vasundhara, Near Vasundhara Haat, Ghaziabad, U.P.',
+      mapQuery: 'Hotel Mukut Regency CC-1 Sector-13 Vasundhara Ghaziabad UP',
+      metroInfo: 'निकटतम मेट्रो स्टेशन: 1. वैशाली (ब्लू लाइन), 2. मोहन नगर (रेड लाइन)',
+      metroInfoEn: 'Nearest Metro: 1. Vaishali (Blue Line), 2. Mohan Nagar (Red Line)',
+      phone: '+91-120-4566998, +91-9582751602',
+      website: 'https://www.hotelmukutregency.com',
+      imageUrl: '/images/hotel-mukut-regency.jpg',
+      isConfirmed: true
     },
     RECEPTION: {
       id: 'RECEPTION',
@@ -214,16 +226,16 @@ export const WEDDING_DATA: WeddingConfig = {
     {
       id: 'mangal-phere',
       order: 6,
-      title: 'मंगल फेरे',
-      englishTitle: 'Mangal Phere (Wedding Vows)',
-      date: '4 December 2026',
-      weekday: 'शुक्रवार (Friday)',
-      time: 'सुबह 05:00 बजे',
-      isoDate: '2026-12-04T05:00:00',
+      title: 'शुभ विवाह एवं मंगल फेरे',
+      englishTitle: 'Wedding Ceremony & Mangal Phere',
+      date: '3-4 December 2026',
+      weekday: 'गुरुवार - शुक्रवार (Thu - Fri)',
+      time: '3 दिसंबर सायं 07:00 बजे से (फेरे: 4 दिसंबर प्रातः 05:00 बजे)',
+      isoDate: '2026-12-03T19:00:00',
       locationType: 'WEDDING',
       iconType: 'fire',
-      description: 'पवित्र अग्नि के समक्ष सात फेरे और सात जन्मों का पावन बंधन एवं वरमाला।',
-      rituals: ['जयमाला', 'कन्यादान', 'सप्तपदी', 'सिंदूर दान']
+      description: 'शुभ विवाह महोत्सव एवं पवित्र अग्नि के समक्ष सात फेरे और सात जन्मों का पावन बंधन एवं वरमाला। होटल मुकुट रीजेंसी, वसुंधरा, गाजियाबाद।',
+      rituals: ['वरमाला / जयमाला', 'शुभ विवाह संस्कार', 'कन्यादान', 'सप्तपदी (मंगल फेरे)', 'सिंदूर दान']
     },
     {
       id: 'priti-bhoj',

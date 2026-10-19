@@ -124,8 +124,18 @@ export const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
               <MapPin className="w-5 h-5 text-[#C9A45C] shrink-0 mt-0.5" />
               <div className="flex-1">
                 <p className="text-xs font-serif uppercase tracking-wider text-[#C9A45C] font-semibold">{location.name}</p>
+                {location.subName && (
+                  <p className="text-[11px] text-[#E8D6A5] font-serif mt-0.5">{location.subName}</p>
+                )}
                 {location.isConfirmed && location.address ? (
-                  <p className="text-xs sm:text-sm text-[#FFF5DF] mt-1 leading-relaxed">{location.address}</p>
+                  <>
+                    <p className="text-xs sm:text-sm text-[#FFF5DF] mt-1 leading-relaxed">{location.address}</p>
+                    {location.metroInfo && (
+                      <p className="text-xs text-[#E8D6A5] mt-1.5 font-serif border-t border-[#C9A45C]/20 pt-1.5">
+                        🚇 {t(location.metroInfo, location.metroInfoEn || location.metroInfo)}
+                      </p>
+                    )}
+                  </>
                 ) : (
                   <div className="flex items-center gap-2 mt-1.5 text-amber-300 text-xs sm:text-sm bg-[#350610] p-2.5 rounded-lg border border-amber-500/40">
                     <AlertCircle className="w-4 h-4 shrink-0 text-amber-400" />
