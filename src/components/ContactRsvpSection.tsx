@@ -20,16 +20,16 @@ export const ContactRsvpSection: React.FC = () => {
     if (isEn) {
       const namePart = nameStr ? `Namaste, I am ${nameStr}` : 'Namaste,';
       if (attendingStatus === 'yes') {
-        return `${namePart}. We are honored to attend the auspicious wedding of Amish & Riya on 3rd December 2026. Total family members attending: ${guestCount}. Thank you! 🙏`;
+        return `${namePart}. We are honored to confirm our attendance for the Grand Wedding Reception (प्रीति भोज) of Amish & Riya on Saturday, 5th December 2026 at 07:00 PM (Hotel Grand Mercure Surya Palace, Vadodara). Total family members attending: ${guestCount}. Thank you! 🙏`;
       } else {
-        return `${namePart}. Sending our heartiest congratulations and blessings to Amish & Riya on their sacred union! Wishing them eternal happiness. 💐`;
+        return `${namePart}. Sending our heartiest congratulations and warmest blessings to Amish & Riya on their sacred wedding and reception! Wishing them lifelong happiness. 💐`;
       }
     } else {
       const namePart = nameStr ? `नमस्ते, मैं ${nameStr}` : 'नमस्ते,';
       if (attendingStatus === 'yes') {
-        return `${namePart}। हम अमीश एवं रिया के शुभ विवाह (3 दिसंबर 2026) में सपरिवार सम्मिलित होकर वर-वधू को आशीर्वाद देंगे। हमारे साथ कुल ${guestCount} सदस्य होंगे। धन्यवाद! 🙏`;
+        return `${namePart}। हम अमीश एवं रिया के शुभ विवाह प्रीति भोज (शनिवार, 5 दिसंबर 2026, शाम 07:00 बजे — होटल ग्रैंड मर्क्युरी, सूर्य पैलेस, वड़ोदरा) में सपरिवार सम्मिलित होकर नव-दंपति को आशीर्वाद देंगे। हमारे साथ कुल ${guestCount} सदस्य होंगे। धन्यवाद! 🙏`;
       } else {
-        return `${namePart}। हम अमीश और रिया के शुभ विवाह पर अपनी हार्दिक शुभकामनाएं और शुभाशीर्वाद प्रेषित करते हैं! ईश्वर नव-दंपति को सदा सुखी रखे। 💐`;
+        return `${namePart}। हम अमीश एवं रिया के शुभ विवाह एवं प्रीति भोज के पावन अवसर पर अपनी हार्दिक शुभकामनाएं और शुभाशीर्वाद प्रेषित करते हैं! ईश्वर नव-दंपति को सदा सुखी रखे। 💐`;
       }
     }
   };
@@ -69,10 +69,10 @@ export const ContactRsvpSection: React.FC = () => {
       {/* Header */}
       <div className="text-center mb-12">
         <span className="text-sm sm:text-base font-serif tracking-[0.25em] text-[#C9A45C] uppercase font-semibold block mb-2">
-          {t("॥ संपर्क एवं उपस्थिति पुष्टि ॥", "॥ Contact & RSVP ॥")}
+          {t("॥ प्रीति भोज उपस्थिति पुष्टि (RSVP) ॥", "॥ Reception Attendance & RSVP ॥")}
         </span>
         <h2 className="text-3xl sm:text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FAF3E0] via-[#E8D6A5] to-[#C9A45C] drop-shadow-md">
-          {t("संपर्क सूत्र एवं RSVP", "Family Contacts & RSVP")}
+          {t("प्रीति भोज RSVP एवं संपर्क", "Reception RSVP & Contact")}
         </h2>
         <div className="flex items-center justify-center gap-3 my-4">
           <span className="h-[1px] w-16 bg-gradient-to-r from-transparent to-[#C9A45C]" />
@@ -81,8 +81,8 @@ export const ContactRsvpSection: React.FC = () => {
         </div>
         <p className="text-base sm:text-lg text-[#FFF5DF] font-serif max-w-xl mx-auto">
           {t(
-            "विवाह व्यवस्था एवं स्वागत सत्कार हेतु कृपया अपनी उपस्थिति की सूचना प्रदान करें।",
-            "Please confirm your attendance so we may arrange hospitality with royal care."
+            "शनिवार, 5 दिसंबर 2026 (शाम 07:00 बजे) प्रीति भोज में स्वागत सत्कार हेतु कृपया अपनी उपस्थिति की सूचना प्रदान करें।",
+            "Please confirm your attendance for the Grand Wedding Reception on Saturday, 5th December 2026 at 07:00 PM."
           )}
         </p>
       </div>
@@ -94,7 +94,7 @@ export const ContactRsvpSection: React.FC = () => {
           <div className="bg-[#350610]/95 rounded-[22px] p-6 sm:p-8 border border-[#C9A45C]/30 text-left">
             <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#FAF3E0] mb-2 flex items-center gap-2">
               <Phone className="w-5 h-5 text-[#C9A45C]" />
-              <span>{t("परिवार संपर्क सूत्र", "Family Contact Persons")}</span>
+              <span>{t("परिवार संपर्क सूत्र", "Family Contact Person")}</span>
             </h3>
             <p className="text-sm text-[#C9A45C] font-serif mb-6">
               {t(
@@ -107,16 +107,16 @@ export const ContactRsvpSection: React.FC = () => {
               {WEDDING_DATA.contacts.map((contact, idx) => (
                 <div
                   key={idx}
-                  className="p-4 sm:p-5 rounded-2xl bg-[#650D1B]/60 border border-[#C9A45C]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                  className="p-5 sm:p-6 rounded-2xl bg-[#650D1B]/60 border border-[#C9A45C]/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-md"
                 >
                   <div>
-                    <h4 className="text-lg sm:text-xl font-serif font-bold text-[#FFF5DF]">
+                    <h4 className="text-xl sm:text-2xl font-serif font-bold text-[#FFF5DF]">
                       {t(contact.name, contact.nameEn || contact.name)}
                     </h4>
-                    <p className="text-sm text-[#E8D6A5] font-serif mb-1 font-medium">
+                    <p className="text-sm sm:text-base text-[#E8D6A5] font-serif mb-1.5 font-semibold">
                       {t(contact.role, contact.roleEn || contact.role)}
                     </p>
-                    <span className="text-base sm:text-lg font-bold text-[#C9A45C] tracking-wider font-mono">
+                    <span className="text-lg sm:text-xl font-bold text-[#C9A45C] tracking-wider font-mono">
                       {contact.phone}
                     </span>
                   </div>
@@ -125,7 +125,7 @@ export const ContactRsvpSection: React.FC = () => {
                     {/* Call Button */}
                     <button
                       onClick={() => handleCall(contact.phone)}
-                      className="p-3 rounded-xl bg-[#350610] border border-[#C9A45C] text-[#FAF3E0] hover:bg-[#831425] transition-colors cursor-pointer"
+                      className="p-3 rounded-xl bg-[#350610] border border-[#C9A45C] text-[#FAF3E0] hover:bg-[#831425] transition-colors cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center"
                       title={t("फ़ोन कॉल करें", "Call on Phone")}
                     >
                       <Phone className="w-5 h-5 text-[#C9A45C]" />
@@ -134,7 +134,7 @@ export const ContactRsvpSection: React.FC = () => {
                     {/* WhatsApp Button */}
                     <button
                       onClick={() => handleWhatsApp(contact.whatsappNumber)}
-                      className="p-3 rounded-xl bg-[#25D366]/20 border border-[#25D366]/60 text-green-300 hover:bg-[#25D366]/30 transition-colors cursor-pointer"
+                      className="p-3 rounded-xl bg-[#25D366]/20 border border-[#25D366]/60 text-green-300 hover:bg-[#25D366]/30 transition-colors cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center"
                       title={t("व्हाट्सएप पर संदेश भेजें", "Send WhatsApp message")}
                     >
                       <MessageCircle className="w-5 h-5 text-green-400" />
@@ -143,7 +143,7 @@ export const ContactRsvpSection: React.FC = () => {
                     {/* Copy Button */}
                     <button
                       onClick={() => handleCopyPhone(contact.phone, idx)}
-                      className="p-3 rounded-xl bg-[#350610] border border-[#C9A45C]/50 text-[#E8D6A5] hover:text-white transition-colors cursor-pointer"
+                      className="p-3 rounded-xl bg-[#350610] border border-[#C9A45C]/50 text-[#E8D6A5] hover:text-white transition-colors cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center"
                       title={t("नंबर कॉपी करें", "Copy Phone Number")}
                     >
                       {copiedIndex === idx ? (
@@ -169,7 +169,7 @@ export const ContactRsvpSection: React.FC = () => {
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#FAF3E0] flex items-center gap-2">
                 <Send className="w-5 h-5 text-[#C9A45C]" />
-                <span>{t("RSVP - उपस्थिति पुष्टि", "RSVP - Confirm Attendance")}</span>
+                <span>{t("RSVP — प्रीति भोज (5 दिसंबर)", "RSVP — Reception (5th Dec)")}</span>
               </h3>
               <span className="text-xs font-serif font-semibold text-[#C9A45C] bg-[#650D1B] px-3 py-1 rounded-full border border-[#C9A45C]/40">
                 via WhatsApp
@@ -177,8 +177,8 @@ export const ContactRsvpSection: React.FC = () => {
             </div>
             <p className="text-sm text-[#C9A45C] font-serif mb-6">
               {t(
-                "संदेश भेजने से पूर्व आप नीचे उसका पूर्वावलोकन (Preview) देख सकते हैं।",
-                "Review the preview below before sending your confirmation via WhatsApp."
+                "शनिवार, 5 दिसंबर 2026 (शाम 07:00 बजे) प्रीति भोज उपस्थिति हेतु नीचे पूर्वावलोकन देखें:",
+                "Confirm your attendance for the 5th December Reception (07:00 PM) below:"
               )}
             </p>
 
@@ -255,8 +255,8 @@ export const ContactRsvpSection: React.FC = () => {
                 <p className="text-[#FFF5DF] italic leading-relaxed text-sm sm:text-base">
                   "{getRsvpMessage()}"
                 </p>
-                <span className="text-xs text-[#E8D6A5] block mt-2">
-                  {t("प्राप्तकर्ता:", "Recipient:")} {defaultContact.name} ({defaultContact.phone})
+                <span className="text-xs text-[#E8D6A5] block mt-2 font-medium">
+                  {t("प्राप्तकर्ता:", "Recipient:")} {defaultContact.name} ({defaultContact.phone}) — {t(defaultContact.role, defaultContact.roleEn || defaultContact.role)}
                 </span>
               </div>
 

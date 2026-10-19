@@ -45,6 +45,13 @@ export interface WeddingConfig {
     day: string;
     targetIso: string; // "2026-12-03T19:00:00+05:30"
   };
+  receptionDate: {
+    hindi: string;
+    english: string;
+    day: string;
+    time: string;
+    targetIso: string; // "2026-12-05T19:00:00+05:30"
+  };
   mantras: {
     ganeshaMukhya: string;
     shloka: string;
@@ -91,6 +98,13 @@ export const WEDDING_DATA: WeddingConfig = {
     english: "Thursday, 3 December 2026",
     day: "गुरुवार",
     targetIso: "2026-12-03T19:00:00+05:30"
+  },
+  receptionDate: {
+    hindi: "शनिवार, 5 दिसंबर 2026",
+    english: "Saturday, 5 December 2026",
+    day: "शनिवार",
+    time: "शाम 07:00 बजे (07:00 PM)",
+    targetIso: "2026-12-05T19:00:00+05:30"
   },
   mantras: {
     ganeshaMukhya: "॥ श्री गणेशाय नमः ॥",
@@ -242,20 +256,12 @@ export const WEDDING_DATA: WeddingConfig = {
   },
   contacts: [
     {
-      name: "अनिल शर्मा",
-      nameEn: "Anil Sharma",
-      phone: "+91 8758743895",
-      whatsappNumber: "918758743895",
-      role: "वर के पिता (Father of Groom)",
-      roleEn: "Father of Groom"
-    },
-    {
       name: "प्रफुल्ल शर्मा",
-      nameEn: "Prafull Sharma",
+      nameEn: "Prafful Sharma",
       phone: "+91 9106617895",
       whatsappNumber: "919106617895",
-      role: "परिवारजन (Family Coordinator)",
-      roleEn: "Family Coordinator"
+      role: "वर के भ्राता (Groom's Brother)",
+      roleEn: "Groom's Brother"
     }
   ]
 };
