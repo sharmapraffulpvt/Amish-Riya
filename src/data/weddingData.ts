@@ -6,6 +6,7 @@ export interface WeddingLocation {
   subNameEn?: string;
   address: string | null;
   mapQuery: string | null;
+  mapsUrl?: string | null;
   isConfirmed: boolean;
   unconfirmedMessage?: string;
   metroInfo?: string;
@@ -126,6 +127,7 @@ export const WEDDING_DATA: WeddingConfig = {
       nameEn: 'Home Residence',
       address: 'B-203 Sunrise Heights Apartments, Opposite Lakme Salon, Sunpharma Road, Atladara, Vadodara - 390012',
       mapQuery: 'B-203 Sunrise Heights Apartments Opposite Lakme Salon Sunpharma Road Atladara Vadodara 390012',
+      mapsUrl: 'https://maps.app.goo.gl/YhAdMbryPXXEMzFx5',
       isConfirmed: true
     },
     WEDDING: {
@@ -136,6 +138,7 @@ export const WEDDING_DATA: WeddingConfig = {
       subNameEn: 'A Unit of Janki Mahal Hotel Pvt. Ltd. (Woodburry Cafe)',
       address: 'CC-1, Sector-13, Vasundhara, Near Vasundhara Haat, Ghaziabad, U.P.',
       mapQuery: 'Hotel Mukut Regency CC-1 Sector-13 Vasundhara Ghaziabad UP',
+      mapsUrl: 'https://maps.app.goo.gl/RZuPLCFnyDGftvzG7',
       metroInfo: 'निकटतम मेट्रो स्टेशन: 1. वैशाली (ब्लू लाइन), 2. मोहन नगर (रेड लाइन)',
       metroInfoEn: 'Nearest Metro: 1. Vaishali (Blue Line), 2. Mohan Nagar (Red Line)',
       phone: '+91-120-4566998, +91-9582751602',
@@ -149,6 +152,7 @@ export const WEDDING_DATA: WeddingConfig = {
       nameEn: 'Reception Venue',
       address: 'होटल ग्रैंड मर्क्युरी, सुर्या पैलेस, जेतलपुर रोड, पारसी अगियारी के सामने, सयाजीगंज, वड़ोदरा',
       mapQuery: 'Grand Mercure Vadodara Surya Palace, Jetalpur Road, Sayajiganj, Vadodara',
+      mapsUrl: 'https://maps.app.goo.gl/CTGN1KRXoq2GPEDf9',
       isConfirmed: true
     }
   },
@@ -279,8 +283,14 @@ export const WEDDING_DATA: WeddingConfig = {
 };
 
 export const getGoogleMapsUrl = (location: WeddingLocation): string | null => {
-  if (!location.isConfirmed || !location.mapQuery) {
+  if (!location.isConfirmed) {
     return null;
   }
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location.mapQuery)}`;
+  if (location.mapsUrl) {
+    return location.mapsUrl;
+  }
+  if (location.mapQuery) {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location.mapQuery)}`;
+  }
+  return null;
 };
