@@ -19,14 +19,23 @@ class SoundManager {
         (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       this.audioCtx = new AudioCtxClass();
 
-      // Master gain for overall balance
-      this.masterGain = this.audioCtx.createGain();
-      this.masterGain.gain.value = 0.8;
-      this.masterGain.connect(this.audioCtx.destination);
+      // Master dynamics compressor to ensure loud, crystal-clear sound without any distortion
+      const compressor = this.audioCtx.createDynamicsCompressor();
+      compressor.threshold.setValueAtTime(-14, this.audioCtx.currentTime);
+      compressor.knee.setValueAtTime(6, this.audioCtx.currentTime);
+      compressor.ratio.setValueAtTime(3.5, this.audioCtx.currentTime);
+      compressor.attack.setValueAtTime(0.005, this.audioCtx.currentTime);
+      compressor.release.setValueAtTime(0.2, this.audioCtx.currentTime);
 
-      // Music gain specifically for the peaceful piano ambient track
+      // Master gain for full, rich volume across all phones and speakers
+      this.masterGain = this.audioCtx.createGain();
+      this.masterGain.gain.value = 1.0; // Increased to 1.0 for full audibility
+      this.masterGain.connect(compressor);
+      compressor.connect(this.audioCtx.destination);
+
+      // Music gain specifically for the peaceful piano ambient track (raised significantly)
       this.musicGain = this.audioCtx.createGain();
-      this.musicGain.gain.value = 0.55;
+      this.musicGain.gain.value = 0.95; // Increased from 0.55 to 0.95
       this.musicGain.connect(this.masterGain);
     }
 
@@ -50,7 +59,7 @@ class SoundManager {
       if (this.masterGain && this.audioCtx) {
         this.masterGain.gain.setTargetAtTime(0, this.audioCtx.currentTime, 0.25);
         setTimeout(() => {
-          if (this.masterGain) this.masterGain.gain.value = 0.8;
+          if (this.masterGain) this.masterGain.gain.value = 1.0;
         }, 800);
       }
     }
@@ -73,7 +82,7 @@ class SoundManager {
    * Physically modeled acoustic piano note synthesizer:
    * - Fundamental frequency + unison micro-detune (+1.2 cents)
    * - Harmonic overtones (2nd & 3rd harmonics with authentic acoustic decay)
-   * - Gentle wooden soundboard lowpass filter
+   * - Gentle wooden soundboard lowpass filter (tuned for crystal clarity on phones)
    * - Soft percussive hammer strike transient
    * - Realistic sustain pedal resonance
    */
@@ -81,18 +90,18 @@ class SoundManager {
     freq: number,
     startTime: number,
     duration: number = 3.5,
-    velocity: number = 0.25,
+    velocity: number = 0.55,
     pan: number = 0
   ) {
     if (!this.audioCtx || !this.musicGain) return;
     const ctx = this.audioCtx;
 
-    // Filter to emulate warm piano soundboard wood resonance
+    // Filter to emulate warm piano soundboard wood resonance with clear projection
     const filter = ctx.createBiquadFilter();
     filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(Math.min(freq * 3.5, 2600), startTime);
-    filter.frequency.exponentialRampToValueAtTime(Math.min(freq * 1.5, 1200), startTime + duration * 0.7);
-    filter.Q.value = 0.85;
+    filter.frequency.setValueAtTime(Math.min(freq * 4.2, 3600), startTime);
+    filter.frequency.exponentialRampToValueAtTime(Math.min(freq * 2.0, 1600), startTime + duration * 0.7);
+    filter.Q.value = 0.9;
 
     // Master envelope for the note
     const noteGain = ctx.createGain();
@@ -100,7 +109,7 @@ class SoundManager {
     // Soft organic hammer attack (18ms)
     noteGain.gain.linearRampToValueAtTime(velocity, startTime + 0.018);
     // Initial attack-to-body decay (60ms)
-    noteGain.gain.exponentialRampToValueAtTime(velocity * 0.75, startTime + 0.075);
+    noteGain.gain.exponentialRampToValueAtTime(velocity * 0.8, startTime + 0.075);
     // Smooth natural exponential string decay
     noteGain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
 
@@ -114,28 +123,28 @@ class SoundManager {
     osc2.type = 'sine';
     osc2.frequency.setValueAtTime(freq * 1.0014, startTime);
 
-    // 2nd Harmonic (octave above at lower volume)
+    // 2nd Harmonic (octave above at full rich presence)
     const oscHarm2 = ctx.createOscillator();
     const harm2Gain = ctx.createGain();
     oscHarm2.type = 'sine';
     oscHarm2.frequency.setValueAtTime(freq * 2, startTime);
-    harm2Gain.gain.setValueAtTime(velocity * 0.35, startTime);
-    harm2Gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration * 0.6);
+    harm2Gain.gain.setValueAtTime(velocity * 0.42, startTime);
+    harm2Gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration * 0.65);
 
     // 3rd Harmonic (twelfth above)
     const oscHarm3 = ctx.createOscillator();
     const harm3Gain = ctx.createGain();
     oscHarm3.type = 'sine';
     oscHarm3.frequency.setValueAtTime(freq * 3, startTime);
-    harm3Gain.gain.setValueAtTime(velocity * 0.12, startTime);
-    harm3Gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration * 0.4);
+    harm3Gain.gain.setValueAtTime(velocity * 0.16, startTime);
+    harm3Gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration * 0.45);
 
     // Soft percussive hammer strike transient (short low-frequency thud)
     const hammer = ctx.createOscillator();
     const hammerGain = ctx.createGain();
     hammer.type = 'triangle';
     hammer.frequency.setValueAtTime(freq * 0.5, startTime);
-    hammerGain.gain.setValueAtTime(velocity * 0.18, startTime);
+    hammerGain.gain.setValueAtTime(velocity * 0.22, startTime);
     hammerGain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.035);
 
     // Connections
@@ -175,7 +184,7 @@ class SoundManager {
   }
 
   /**
-   * Warm ambient pad layer: provides a faint, soothing harmonic cushion
+   * Warm ambient pad layer: provides a soothing harmonic cushion
    * so the background always feels lush, relaxing, and cinematic.
    */
   private playPadChord(frequencies: number[], startTime: number, duration: number = 5.0) {
@@ -188,14 +197,14 @@ class SoundManager {
       const filter = ctx.createBiquadFilter();
 
       filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(550, startTime);
+      filter.frequency.setValueAtTime(700, startTime);
 
       osc.type = 'sine';
       osc.frequency.setValueAtTime(f, startTime);
 
       gain.gain.setValueAtTime(0, startTime);
-      gain.gain.linearRampToValueAtTime(0.045, startTime + 1.2);
-      gain.gain.setValueAtTime(0.045, startTime + duration - 1.2);
+      gain.gain.linearRampToValueAtTime(0.12, startTime + 1.2); // Raised from 0.045 to 0.12
+      gain.gain.setValueAtTime(0.12, startTime + duration - 1.2);
       gain.gain.linearRampToValueAtTime(0.0001, startTime + duration);
 
       osc.connect(filter);
@@ -227,14 +236,14 @@ class SoundManager {
         bass: 87.31, // F2
         pad: [174.61, 261.63, 329.63], // F3, C4, E4
         arpeggio: [
-          { f: 87.31, t: 0.0, v: 0.28, p: -0.35, d: 4.8 },  // F2
-          { f: 130.81, t: 0.45, v: 0.22, p: -0.2, d: 4.2 }, // C3
-          { f: 220.00, t: 0.90, v: 0.22, p: -0.1, d: 3.8 }, // A3
-          { f: 261.63, t: 1.35, v: 0.24, p: 0.0, d: 3.6 },  // C4
-          { f: 329.63, t: 1.80, v: 0.23, p: 0.15, d: 3.5 }, // E4
-          { f: 392.00, t: 2.25, v: 0.22, p: 0.25, d: 3.4 }, // G4
-          { f: 329.63, t: 2.70, v: 0.19, p: 0.15, d: 3.2 }, // E4
-          { f: 261.63, t: 3.15, v: 0.18, p: 0.0, d: 3.0 },  // C4
+          { f: 87.31, t: 0.0, v: 0.65, p: -0.35, d: 4.8 },  // F2
+          { f: 130.81, t: 0.45, v: 0.52, p: -0.2, d: 4.2 }, // C3
+          { f: 220.00, t: 0.90, v: 0.52, p: -0.1, d: 3.8 }, // A3
+          { f: 261.63, t: 1.35, v: 0.56, p: 0.0, d: 3.6 },  // C4
+          { f: 329.63, t: 1.80, v: 0.55, p: 0.15, d: 3.5 }, // E4
+          { f: 392.00, t: 2.25, v: 0.52, p: 0.25, d: 3.4 }, // G4
+          { f: 329.63, t: 2.70, v: 0.46, p: 0.15, d: 3.2 }, // E4
+          { f: 261.63, t: 3.15, v: 0.44, p: 0.0, d: 3.0 },  // C4
         ],
         duration: 3.8,
       },
@@ -243,14 +252,14 @@ class SoundManager {
         bass: 82.41, // E2
         pad: [164.81, 246.94, 261.63], // E3, B3, C4
         arpeggio: [
-          { f: 82.41, t: 0.0, v: 0.27, p: -0.35, d: 4.8 },  // E2
-          { f: 130.81, t: 0.45, v: 0.21, p: -0.2, d: 4.2 }, // C3
-          { f: 196.00, t: 0.90, v: 0.22, p: -0.1, d: 3.8 }, // G3
-          { f: 246.94, t: 1.35, v: 0.23, p: 0.05, d: 3.6 }, // B3
-          { f: 261.63, t: 1.80, v: 0.22, p: 0.15, d: 3.5 }, // C4
-          { f: 329.63, t: 2.25, v: 0.24, p: 0.25, d: 3.4 }, // E4
-          { f: 246.94, t: 2.70, v: 0.18, p: 0.05, d: 3.2 }, // B3
-          { f: 196.00, t: 3.15, v: 0.17, p: -0.1, d: 3.0 }, // G3
+          { f: 82.41, t: 0.0, v: 0.64, p: -0.35, d: 4.8 },  // E2
+          { f: 130.81, t: 0.45, v: 0.50, p: -0.2, d: 4.2 }, // C3
+          { f: 196.00, t: 0.90, v: 0.52, p: -0.1, d: 3.8 }, // G3
+          { f: 246.94, t: 1.35, v: 0.55, p: 0.05, d: 3.6 }, // B3
+          { f: 261.63, t: 1.80, v: 0.52, p: 0.15, d: 3.5 }, // C4
+          { f: 329.63, t: 2.25, v: 0.56, p: 0.25, d: 3.4 }, // E4
+          { f: 246.94, t: 2.70, v: 0.44, p: 0.05, d: 3.2 }, // B3
+          { f: 196.00, t: 3.15, v: 0.42, p: -0.1, d: 3.0 }, // G3
         ],
         duration: 3.8,
       },
@@ -259,14 +268,14 @@ class SoundManager {
         bass: 73.42, // D2
         pad: [146.83, 220.00, 261.63], // D3, A3, C4
         arpeggio: [
-          { f: 73.42, t: 0.0, v: 0.28, p: -0.4, d: 4.8 },   // D2
-          { f: 146.83, t: 0.45, v: 0.22, p: -0.2, d: 4.2 }, // D3
-          { f: 220.00, t: 0.90, v: 0.22, p: -0.1, d: 3.8 }, // A3
-          { f: 261.63, t: 1.35, v: 0.24, p: 0.0, d: 3.6 },  // C4
-          { f: 293.66, t: 1.80, v: 0.23, p: 0.15, d: 3.5 }, // D4
-          { f: 349.23, t: 2.25, v: 0.25, p: 0.25, d: 3.4 }, // F4
-          { f: 293.66, t: 2.70, v: 0.19, p: 0.15, d: 3.2 }, // D4
-          { f: 220.00, t: 3.15, v: 0.18, p: -0.1, d: 3.0 }, // A3
+          { f: 73.42, t: 0.0, v: 0.65, p: -0.4, d: 4.8 },   // D2
+          { f: 146.83, t: 0.45, v: 0.52, p: -0.2, d: 4.2 }, // D3
+          { f: 220.00, t: 0.90, v: 0.52, p: -0.1, d: 3.8 }, // A3
+          { f: 261.63, t: 1.35, v: 0.56, p: 0.0, d: 3.6 },  // C4
+          { f: 293.66, t: 1.80, v: 0.54, p: 0.15, d: 3.5 }, // D4
+          { f: 349.23, t: 2.25, v: 0.58, p: 0.25, d: 3.4 }, // F4
+          { f: 293.66, t: 2.70, v: 0.46, p: 0.15, d: 3.2 }, // D4
+          { f: 220.00, t: 3.15, v: 0.44, p: -0.1, d: 3.0 }, // A3
         ],
         duration: 3.8,
       },
@@ -275,14 +284,14 @@ class SoundManager {
         bass: 110.00, // A2
         pad: [164.81, 220.00, 293.66], // E3, A3, D4
         arpeggio: [
-          { f: 110.00, t: 0.0, v: 0.26, p: -0.3, d: 4.8 },  // A2
-          { f: 164.81, t: 0.45, v: 0.21, p: -0.15, d: 4.2 },// E3
-          { f: 220.00, t: 0.90, v: 0.22, p: 0.0, d: 3.8 },  // A3
-          { f: 246.94, t: 1.35, v: 0.23, p: 0.1, d: 3.6 },  // B3
-          { f: 261.63, t: 1.80, v: 0.24, p: 0.18, d: 3.5 }, // C4
-          { f: 329.63, t: 2.25, v: 0.22, p: 0.28, d: 3.4 }, // E4
-          { f: 261.63, t: 2.70, v: 0.19, p: 0.18, d: 3.2 }, // C4
-          { f: 220.00, t: 3.15, v: 0.17, p: 0.0, d: 3.0 },  // A3
+          { f: 110.00, t: 0.0, v: 0.62, p: -0.3, d: 4.8 },  // A2
+          { f: 164.81, t: 0.45, v: 0.50, p: -0.15, d: 4.2 },// E3
+          { f: 220.00, t: 0.90, v: 0.52, p: 0.0, d: 3.8 },  // A3
+          { f: 246.94, t: 1.35, v: 0.55, p: 0.1, d: 3.6 },  // B3
+          { f: 261.63, t: 1.80, v: 0.56, p: 0.18, d: 3.5 }, // C4
+          { f: 329.63, t: 2.25, v: 0.52, p: 0.28, d: 3.4 }, // E4
+          { f: 261.63, t: 2.70, v: 0.46, p: 0.18, d: 3.2 }, // C4
+          { f: 220.00, t: 3.15, v: 0.42, p: 0.0, d: 3.0 },  // A3
         ],
         duration: 3.8,
       },
@@ -291,14 +300,14 @@ class SoundManager {
         bass: 98.00, // G2
         pad: [196.00, 246.94, 293.66], // G3, B3, D4
         arpeggio: [
-          { f: 98.00, t: 0.0, v: 0.26, p: -0.35, d: 4.8 },  // G2
-          { f: 146.83, t: 0.45, v: 0.21, p: -0.2, d: 4.2 }, // D3
-          { f: 196.00, t: 0.90, v: 0.22, p: -0.05, d: 3.8 },// G3
-          { f: 261.63, t: 1.35, v: 0.23, p: 0.1, d: 3.6 },  // C4
-          { f: 293.66, t: 1.80, v: 0.24, p: 0.2, d: 3.5 },  // D4
-          { f: 392.00, t: 2.25, v: 0.22, p: 0.3, d: 3.4 },  // G4
-          { f: 329.63, t: 2.70, v: 0.18, p: 0.18, d: 3.2 }, // E4
-          { f: 246.94, t: 3.15, v: 0.17, p: 0.05, d: 3.0 }, // B3
+          { f: 98.00, t: 0.0, v: 0.62, p: -0.35, d: 4.8 },  // G2
+          { f: 146.83, t: 0.45, v: 0.50, p: -0.2, d: 4.2 }, // D3
+          { f: 196.00, t: 0.90, v: 0.52, p: -0.05, d: 3.8 },// G3
+          { f: 261.63, t: 1.35, v: 0.55, p: 0.1, d: 3.6 },  // C4
+          { f: 293.66, t: 1.80, v: 0.56, p: 0.2, d: 3.5 },  // D4
+          { f: 392.00, t: 2.25, v: 0.52, p: 0.3, d: 3.4 },  // G4
+          { f: 329.63, t: 2.70, v: 0.44, p: 0.18, d: 3.2 }, // E4
+          { f: 246.94, t: 3.15, v: 0.42, p: 0.05, d: 3.0 }, // B3
         ],
         duration: 3.8,
       },
@@ -307,14 +316,14 @@ class SoundManager {
         bass: 65.41, // C2
         pad: [130.81, 196.00, 293.66], // C3, G3, D4
         arpeggio: [
-          { f: 65.41, t: 0.0, v: 0.28, p: -0.4, d: 5.0 },   // C2
-          { f: 130.81, t: 0.45, v: 0.22, p: -0.2, d: 4.4 }, // C3
-          { f: 196.00, t: 0.90, v: 0.22, p: -0.05, d: 4.0 },// G3
-          { f: 261.63, t: 1.35, v: 0.24, p: 0.1, d: 3.8 },  // C4
-          { f: 293.66, t: 1.80, v: 0.24, p: 0.2, d: 3.6 },  // D4
-          { f: 329.63, t: 2.25, v: 0.25, p: 0.3, d: 3.5 },  // E4
-          { f: 261.63, t: 2.70, v: 0.20, p: 0.1, d: 3.2 },  // C4
-          { f: 196.00, t: 3.15, v: 0.18, p: -0.05, d: 3.0 },// G3
+          { f: 65.41, t: 0.0, v: 0.65, p: -0.4, d: 5.0 },   // C2
+          { f: 130.81, t: 0.45, v: 0.52, p: -0.2, d: 4.4 }, // C3
+          { f: 196.00, t: 0.90, v: 0.52, p: -0.05, d: 4.0 },// G3
+          { f: 261.63, t: 1.35, v: 0.56, p: 0.1, d: 3.8 },  // C4
+          { f: 293.66, t: 1.80, v: 0.56, p: 0.2, d: 3.6 },  // D4
+          { f: 329.63, t: 2.25, v: 0.58, p: 0.3, d: 3.5 },  // E4
+          { f: 261.63, t: 2.70, v: 0.48, p: 0.1, d: 3.2 },  // C4
+          { f: 196.00, t: 3.15, v: 0.44, p: -0.05, d: 3.0 },// G3
         ],
         duration: 3.8,
       },
@@ -377,13 +386,13 @@ class SoundManager {
         const filter = ctx.createBiquadFilter();
 
         filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(600, now);
+        filter.frequency.setValueAtTime(650, now);
 
         osc.type = 'sine';
         osc.frequency.setValueAtTime(f, now);
 
         gain.gain.setValueAtTime(0, now);
-        gain.gain.linearRampToValueAtTime(0.22 - idx * 0.04, now + 0.12);
+        gain.gain.linearRampToValueAtTime(0.40 - idx * 0.05, now + 0.12);
         gain.gain.exponentialRampToValueAtTime(0.0001, now + 3.8);
 
         osc.connect(filter);
@@ -397,14 +406,14 @@ class SoundManager {
       // 2. Cascading ethereal celestial harp & crystalline celesta notes
       // C4, E4, G4, B4, D5, E5, G5, C6 (Lush Cmaj9 celestial arpeggio)
       const harpNotes = [
-        { f: 261.63, delay: 0.04, vol: 0.28 }, // C4
-        { f: 329.63, delay: 0.11, vol: 0.27 }, // E4
-        { f: 392.00, delay: 0.18, vol: 0.26 }, // G4
-        { f: 493.88, delay: 0.25, vol: 0.25 }, // B4
-        { f: 587.33, delay: 0.33, vol: 0.24 }, // D5
-        { f: 659.25, delay: 0.42, vol: 0.23 }, // E5
-        { f: 783.99, delay: 0.52, vol: 0.21 }, // G5
-        { f: 1046.50, delay: 0.64, vol: 0.18 }, // C6
+        { f: 261.63, delay: 0.04, vol: 0.48 }, // C4
+        { f: 329.63, delay: 0.11, vol: 0.46 }, // E4
+        { f: 392.00, delay: 0.18, vol: 0.45 }, // G4
+        { f: 493.88, delay: 0.25, vol: 0.44 }, // B4
+        { f: 587.33, delay: 0.33, vol: 0.42 }, // D5
+        { f: 659.25, delay: 0.42, vol: 0.40 }, // E5
+        { f: 783.99, delay: 0.52, vol: 0.38 }, // G5
+        { f: 1046.50, delay: 0.64, vol: 0.34 }, // C6
       ];
 
       harpNotes.forEach((n) => {
@@ -415,8 +424,8 @@ class SoundManager {
 
         filter.type = 'lowpass';
         // Warm lowpass filter to remove harshness and ensure a calm, gentle timbre
-        filter.frequency.setValueAtTime(2200, now + n.delay);
-        filter.frequency.exponentialRampToValueAtTime(900, now + n.delay + 3.0);
+        filter.frequency.setValueAtTime(2400, now + n.delay);
+        filter.frequency.exponentialRampToValueAtTime(1000, now + n.delay + 3.0);
 
         osc.type = 'sine';
         osc.frequency.setValueAtTime(n.f, now + n.delay);
@@ -426,7 +435,7 @@ class SoundManager {
         oscHarm.frequency.setValueAtTime(n.f * 2, now + n.delay);
 
         const harmGain = ctx.createGain();
-        harmGain.gain.setValueAtTime(n.vol * 0.25, now + n.delay);
+        harmGain.gain.setValueAtTime(n.vol * 0.30, now + n.delay);
         harmGain.gain.exponentialRampToValueAtTime(0.0001, now + n.delay + 1.8);
 
         // Smooth 40ms attack so it enters gently like silk, zero clicks
@@ -461,7 +470,7 @@ class SoundManager {
       shimmer.frequency.setValueAtTime(523.25, now);
 
       shimmerGain.gain.setValueAtTime(0, now);
-      shimmerGain.gain.linearRampToValueAtTime(0.06, now + 0.35);
+      shimmerGain.gain.linearRampToValueAtTime(0.12, now + 0.35);
       shimmerGain.gain.exponentialRampToValueAtTime(0.0001, now + 2.5);
 
       shimmer.connect(shimmerFilter);
@@ -488,7 +497,7 @@ class SoundManager {
       osc.frequency.setValueAtTime(650, this.audioCtx.currentTime);
       osc.frequency.exponentialRampToValueAtTime(320, this.audioCtx.currentTime + 0.1);
 
-      gain.gain.setValueAtTime(0.35, this.audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.45, this.audioCtx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + 0.1);
 
       osc.connect(gain);
@@ -523,7 +532,7 @@ class SoundManager {
         osc.frequency.setValueAtTime(freq, now + idx * 0.08);
 
         gain.gain.setValueAtTime(0, now + idx * 0.08);
-        gain.gain.linearRampToValueAtTime(0.35, now + idx * 0.08 + 0.03);
+        gain.gain.linearRampToValueAtTime(0.45, now + idx * 0.08 + 0.03);
         gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.08 + 2.2);
 
         osc.connect(gain);
