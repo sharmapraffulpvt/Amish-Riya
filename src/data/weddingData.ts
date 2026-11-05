@@ -5,7 +5,8 @@ export interface WeddingLocation {
   subName?: string;
   subNameEn?: string;
   address: string | null;
-  mapQuery: string | null;
+  addressEn?: string | null;
+  mapQuery?: string | null;
   mapsUrl?: string | null;
   isConfirmed: boolean;
   unconfirmedMessage?: string;
@@ -125,9 +126,10 @@ export const WEDDING_DATA: WeddingConfig = {
       id: 'HOME',
       name: 'गृह निवास (Home Residence)',
       nameEn: 'Home Residence',
-      address: 'B-203 Sunrise Heights Apartments, Opposite Lakme Salon, Sunpharma Road, Atladara, Vadodara - 390012',
-      mapQuery: 'B-203 Sunrise Heights Apartments Opposite Lakme Salon Sunpharma Road Atladara Vadodara 390012',
-      mapsUrl: 'https://maps.app.goo.gl/YhAdMbryPXXEMzFx5',
+      address: 'वड़ोदरा, गुजरात',
+      addressEn: 'Vadodara, Gujarat',
+      mapQuery: null,
+      mapsUrl: null,
       isConfirmed: true
     },
     WEDDING: {
@@ -136,11 +138,10 @@ export const WEDDING_DATA: WeddingConfig = {
       nameEn: 'Hotel Mukut Regency',
       subName: 'अ यूनिट ऑफ जानकी महल होटल प्रा. लि. (वुडबरी कैफे)',
       subNameEn: 'A Unit of Janki Mahal Hotel Pvt. Ltd. (Woodburry Cafe)',
-      address: 'CC-1, Sector-13, Vasundhara, Near Vasundhara Haat, Ghaziabad, U.P.',
-      mapQuery: 'Hotel Mukut Regency CC-1 Sector-13 Vasundhara Ghaziabad UP',
-      mapsUrl: 'https://maps.app.goo.gl/RZuPLCFnyDGftvzG7',
-      metroInfo: 'निकटतम मेट्रो स्टेशन: 1. वैशाली (ब्लू लाइन), 2. मोहन नगर (रेड लाइन)',
-      metroInfoEn: 'Nearest Metro: 1. Vaishali (Blue Line), 2. Mohan Nagar (Red Line)',
+      address: 'गाजियाबाद, उत्तर प्रदेश',
+      addressEn: 'Ghaziabad, Uttar Pradesh',
+      mapQuery: null,
+      mapsUrl: null,
       phone: '+91-120-4566998, +91-9582751602',
       website: 'https://www.hotelmukutregency.com',
       imageUrl: '/images/hotel-mukut-regency.jpg',
@@ -148,11 +149,12 @@ export const WEDDING_DATA: WeddingConfig = {
     },
     RECEPTION: {
       id: 'RECEPTION',
-      name: 'प्रीति भोज (रिसेप्शन) स्थल',
-      nameEn: 'Reception Venue',
-      address: 'होटल ग्रैंड मर्क्युरी, सुर्या पैलेस, जेतलपुर रोड, पारसी अगियारी के सामने, सयाजीगंज, वड़ोदरा',
-      mapQuery: 'Grand Mercure Vadodara Surya Palace, Jetalpur Road, Sayajiganj, Vadodara',
-      mapsUrl: 'https://maps.app.goo.gl/CTGN1KRXoq2GPEDf9',
+      name: 'होटल ग्रैंड मर्क्युरी, सूर्य पैलेस (Hotel Grand Mercure Surya Palace)',
+      nameEn: 'Hotel Grand Mercure Surya Palace',
+      address: 'वड़ोदरा, गुजरात',
+      addressEn: 'Vadodara, Gujarat',
+      mapQuery: null,
+      mapsUrl: null,
       isConfirmed: true
     }
   },
@@ -282,15 +284,6 @@ export const WEDDING_DATA: WeddingConfig = {
   ]
 };
 
-export const getGoogleMapsUrl = (location: WeddingLocation): string | null => {
-  if (!location.isConfirmed) {
-    return null;
-  }
-  if (location.mapsUrl) {
-    return location.mapsUrl;
-  }
-  if (location.mapQuery) {
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location.mapQuery)}`;
-  }
+export const getGoogleMapsUrl = (_location: WeddingLocation): string | null => {
   return null;
 };

@@ -20,14 +20,14 @@ export const ContactRsvpSection: React.FC = () => {
     if (isEn) {
       const namePart = nameStr ? `Namaste, I am ${nameStr}` : 'Namaste,';
       if (attendingStatus === 'yes') {
-        return `${namePart}. We are honored to confirm our attendance for the Grand Wedding Reception (प्रीति भोज) of Amish & Riya on Saturday, 5th December 2026 at 07:00 PM (Hotel Grand Mercure Surya Palace, Vadodara). Total family members attending: ${guestCount}. Thank you! 🙏`;
+        return `${namePart}. We are honored to confirm our attendance for the Grand Wedding Reception (प्रीति भोज) of Amish & Riya on Saturday, 5th December 2026 at 07:00 PM (Hotel Grand Mercure Surya Palace, Vadodara, Gujarat). Total family members attending: ${guestCount}. Thank you! 🙏`;
       } else {
         return `${namePart}. Sending our heartiest congratulations and warmest blessings to Amish & Riya on their sacred wedding and reception! Wishing them lifelong happiness. 💐`;
       }
     } else {
       const namePart = nameStr ? `नमस्ते, मैं ${nameStr}` : 'नमस्ते,';
       if (attendingStatus === 'yes') {
-        return `${namePart}। हम अमीश एवं रिया के शुभ विवाह प्रीति भोज (शनिवार, 5 दिसंबर 2026, शाम 07:00 बजे — होटल ग्रैंड मर्क्युरी, सूर्य पैलेस, वड़ोदरा) में सपरिवार सम्मिलित होकर नव-दंपति को आशीर्वाद देंगे। हमारे साथ कुल ${guestCount} सदस्य होंगे। धन्यवाद! 🙏`;
+        return `${namePart}। हम अमीश एवं रिया के शुभ विवाह प्रीति भोज (शनिवार, 5 दिसंबर 2026, शाम 07:00 बजे — होटल ग्रैंड मर्क्युरी, सूर्य पैलेस, वड़ोदरा, गुजरात) में सपरिवार सम्मिलित होकर नव-दंपति को आशीर्वाद देंगे। हमारे साथ कुल ${guestCount} सदस्य होंगे। धन्यवाद! 🙏`;
       } else {
         return `${namePart}। हम अमीश एवं रिया के शुभ विवाह एवं प्रीति भोज के पावन अवसर पर अपनी हार्दिक शुभकामनाएं और शुभाशीर्वाद प्रेषित करते हैं! ईश्वर नव-दंपति को सदा सुखी रखे। 💐`;
       }

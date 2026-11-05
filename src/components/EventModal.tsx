@@ -1,6 +1,6 @@
 import React from 'react';
-import { X, Calendar, Clock, MapPin, ExternalLink, Sparkles, AlertCircle } from 'lucide-react';
-import { WeddingEvent, WEDDING_DATA, getGoogleMapsUrl } from '../data/weddingData';
+import { X, Calendar, Clock, MapPin, Sparkles, AlertCircle } from 'lucide-react';
+import { WeddingEvent, WEDDING_DATA } from '../data/weddingData';
 import { soundManager } from '../utils/soundManager';
 import { useLang } from '../context/LanguageContext';
 
@@ -14,14 +14,8 @@ export const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
   if (!event) return null;
 
   const location = WEDDING_DATA.locations[event.locationType];
-  const mapsUrl = getGoogleMapsUrl(location);
 
   const handleClose = () => { soundManager.playClick(); onClose(); };
-
-  const handleOpenMap = () => {
-    soundManager.playClick();
-    if (mapsUrl) window.open(mapsUrl, '_blank', 'noopener,noreferrer');
-  };
 
   const handleAddToCalendar = () => {
     soundManager.playClick();
@@ -32,7 +26,7 @@ export const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
       'BEGIN:VEVENT',
       `SUMMARY:${event.englishTitle} - Amish & Riya Wedding`,
       `DESCRIPTION:${event.description}\nRituals: ${event.rituals.join(', ')}`,
-      `LOCATION:${location.address || 'Vadodara, Gujarat'}`,
+      `LOCATION:${t(location.address || 'Vadodara, Gujarat', location.addressEn || 'Vadodara, Gujarat')}`,
       `DTSTART:${startTime}`,
       `DTEND:${startTime}`,
       'STATUS:CONFIRMED',
@@ -123,19 +117,14 @@ export const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 text-[#C9A45C] shrink-0 mt-0.5" />
               <div className="flex-1">
-                <p className="text-xs font-serif uppercase tracking-wider text-[#C9A45C] font-semibold">{location.name}</p>
+                <p className="text-xs font-serif uppercase tracking-wider text-[#C9A45C] font-semibold">{t(location.name, location.nameEn || location.name)}</p>
                 {location.subName && (
-                  <p className="text-[11px] text-[#E8D6A5] font-serif mt-0.5">{location.subName}</p>
+                  <p className="text-[11px] text-[#E8D6A5] font-serif mt-0.5">{t(location.subName, location.subNameEn || location.subName)}</p>
                 )}
                 {location.isConfirmed && location.address ? (
-                  <>
-                    <p className="text-xs sm:text-sm text-[#FFF5DF] mt-1 leading-relaxed">{location.address}</p>
-                    {location.metroInfo && (
-                      <p className="text-xs text-[#E8D6A5] mt-1.5 font-serif border-t border-[#C9A45C]/20 pt-1.5">
-                        🚇 {t(location.metroInfo, location.metroInfoEn || location.metroInfo)}
-                      </p>
-                    )}
-                  </>
+                  <p className="text-xs sm:text-sm text-[#FFF5DF] mt-1 leading-relaxed font-serif">
+                    {t(location.address, location.addressEn || location.address)}
+                  </p>
                 ) : (
                   <div className="flex items-center gap-2 mt-1.5 text-amber-300 text-xs sm:text-sm bg-[#350610] p-2.5 rounded-lg border border-amber-500/40">
                     <AlertCircle className="w-4 h-4 shrink-0 text-amber-400" />
@@ -146,25 +135,11 @@ export const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
             </div>
           </div>
 
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3">
-            {location.isConfirmed && mapsUrl ? (
-              <button
-                onClick={handleOpenMap}
-                className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#C9A45C] to-[#E8D6A5] text-[#350610] font-serif font-bold text-sm tracking-wide shadow-gold-glow hover:opacity-95 transition-opacity cursor-pointer"
-              >
-                <MapPin className="w-4 h-4" />
-                <span>{t('गूगल मैप्स पर देखें', 'Open in Google Maps')}</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </button>
-            ) : (
-              <div className="flex-1 text-center py-3 px-4 rounded-xl bg-[#650D1B]/60 border border-[#C9A45C]/30 text-xs font-serif text-[#E8D6A5]">
-                {t('स्थान विवरण शीघ्र साझा किया जाएगा', 'Venue details will be shared soon')}
-              </div>
-            )}
+          {/* Button */}
+          <div className="flex justify-center">
             <button
               onClick={handleAddToCalendar}
-              className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#650D1B] border border-[#C9A45C]/70 text-[#FFF5DF] font-serif text-sm hover:bg-[#831425] transition-colors cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-gradient-to-r from-[#650D1B] to-[#831425] border border-[#C9A45C] text-[#FAF3E0] font-serif font-semibold text-sm hover:opacity-95 transition-all shadow-gold-glow cursor-pointer"
             >
               <Calendar className="w-4 h-4 text-[#C9A45C]" />
               <span>{t('कैलेंडर में जोड़ें', 'Save to Calendar')}</span>
